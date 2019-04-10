@@ -23,17 +23,28 @@ app.use(koaBody());
 //   .get('/post/new', add)
 //   .get('/post/:id', show)
 //   .post('/post', create);
-
+function res(code,message,data){
+   return {
+    code: code,
+    message: message,
+    data: null || data
+  }
+}
 app.use(async (ctx,next) => {
     console.log(new Date())
     next()
   });
   
-  router.get('/api/test', showTest);
+  router.get('/api/test', showTest)
+  .post(`/api/post`, add);
 
   async function showTest(ctx,next){
     // await next();
     ctx.response.body = {"ok": "12425"};
+  }
+  async function add (ctx,next) {
+    console.log(ctx.request.body)
+    ctx.response.body = res(0,'success')
   }
 
 app.use(router.routes());
