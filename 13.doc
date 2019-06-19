@@ -1,0 +1,3703 @@
+
+
+
+
+微服务
+设备服务
+系统设计说明书
+
+
+
+版本：1.0.0
+江苏润和软件股份有限公司
+
+文件状态：
+[  ] 草稿
+[√] 正式发布
+[  ] 正在修改	文件标识：	详细设计书
+	当前版本：	1.0.0
+	作    者：	徐键
+	完成日期：	2018/03/21
+
+修改履历
+版本	修订日期	修改内容	作者
+1.0.0	2018/03/21	初版	徐键
+			
+			
+			
+			
+			
+
+目 录
+修订记录	12
+1.文档介绍	13
+1.1．文档目的	13
+1.2．文档范围	13
+1.3．读者对象	13
+1.4．参考文献	13
+1.5．缩写与术语解释	13
+2. 总体结构	13
+2.1.总览	13
+3.数据库物理设计	13
+2.1．表汇总	14
+2.2．表结构详细	14
+2.2.1. 设备类型列表hp_devices_collection	14
+2.2.2. 设备表hp_devices	15
+2.2.3. 制造商hp_devices_mfs	15
+2.2.4. 维保单位hp_maintains_company	16
+2.2.5. 维保人员hp_maintains_employee	16
+2.2.6. 设备维保人员hp_devices_maintains_employee	16
+2.2.7. 设备告警规则hp_devices_alarm_rules	17
+2.2.8. 设备告警日志hp_devices_alarm_logs	17
+2.2.11. 租户设备类型表hp_tenants_devices_collections	18
+2.2.12. 型号表hp_devices_models	18
+2.2.13. 设备告警hp_devices_alarm	18
+2.2.14. 设备拓扑hp_devices_topology	19
+2.2.15. 设备拓扑负责人hp_devices_topology_heads	21
+2.2.16. 设备告警处理hp_devices_alarm_process	22
+2.2.17. 设备拓扑类别hp_devices_topology_category	22
+2.2.18、拓扑设备表hp_devices_topology_belongs	22
+2.2.19、设备状态表hp_devices_status	23
+2.2.20、拓扑类别设备表hp_devices_topology_category_belongs	23
+2.3．安全性设计	24
+2.4．防止用户直接操作数据库的方法	24
+2.5．用户帐号密码的加密方法	24
+2.6．角色与权限	24
+2.7．优化	25
+3.界面设计	25
+3.1．界面的关系图和工作流程图	25
+3.2．主界面	25
+3.3．子界面	25
+3.3.1．子界面A	25
+3.3.2．子界面B	25
+4.模块设计	25
+4.1．模块汇总表	25
+4.2．模块关系图	26
+4.3．设备类型模块	26
+4.3.1、获取设备类型列表	26
+4.3.1.1 请求方向	26
+4.3.1.2 请求方式	26
+4.3.1.3 请求内容	26
+4.3.1.4 请求响应	26
+4.3.2、新增设备类型	27
+4.3.2.1 请求方向	27
+4.3.2.2 请求方式	27
+4.3.2.3 请求内容	27
+4.3.2.4 请求响应	27
+4.3.3、修改设备类型	27
+4.3.3.1 请求方向	27
+4.3.3.2 请求方式	27
+4.3.3.3 请求内容	27
+4.3.3.4 请求响应	27
+4.3.4、删除设备类型	28
+4.3.4.1 请求方向	28
+4.3.4.2 请求方式	28
+4.3.4.3 请求内容	28
+4.3.4.4 请求响应	28
+4.4．设备模块	28
+4.4.1、获取设备列表	28
+4.4.1.1 请求方向	28
+4.4.1.2 请求方式	28
+4.4.1.3 请求内容	28
+4.4.1.4 请求响应	28
+4.4.2、新增设备	29
+4.4.2.1 请求方向	29
+4.4.2.2 请求方式	29
+4.4.2.3 请求内容	29
+4.4.2.4 请求响应	29
+4.4.3、删除设备	29
+4.4.3.1 请求方向	29
+4.4.3.2 请求方式	29
+4.4.3.3 请求内容	30
+4.4.3.4 请求响应	30
+4.4.4、根据设备类型获取设备列表	30
+4.4.4.1 请求方向	30
+4.4.4.2 请求方式	30
+4.4.4.3 请求内容	30
+4.4.4.4 请求响应	30
+4.4.5、根据分支获取设备列表	30
+4.4.5.1 请求方向	30
+4.4.5.2 请求方式	30
+4.4.5.3 请求内容	31
+4.4.5.4 请求响应	31
+4.4.6、修改设备	31
+4.4.6.1 请求方向	31
+4.4.6.2 请求方式	31
+4.4.6.3 请求内容	31
+4.4.6.4 请求响应	32
+4.4.7、获取拓扑及其下所有的设备列表	32
+4.4.7.1 请求方向	32
+4.4.7.2 请求方式	32
+4.4.7.3 请求内容	32
+4.4.7.4 请求响应	32
+4.5．制造商模块	33
+4.5.1、获取制造商列表	33
+4.5.1.1 请求方向	33
+4.5.1.2 请求方式	33
+4.5.1.3 请求内容	33
+4.5.1.4 请求响应	33
+4.5.2、新增制造商	33
+4.5.2.1 请求方向	33
+4.5.2.2 请求方式	33
+4.5.2.3 请求内容	33
+4.5.2.4 请求响应	33
+4.5.3、修改制造商	34
+4.5.3.1 请求方向	34
+4.5.3.2 请求方式	34
+4.5.3.3 请求内容	34
+4.5.3.4 请求响应	34
+4.5.4、删除制造商	34
+4.5.4.1 请求方向	34
+4.5.4.2 请求方式	34
+4.5.4.3 请求内容	34
+4.5.4.4 请求响应	34
+4.6．维保模块	34
+4.6.1、获取维保单位列表	34
+4.6.1.1 请求方向	34
+4.6.1.2 请求方式	34
+4.6.1.3 请求内容	35
+4.6.1.4 请求响应	35
+4.6.2、新增维保单位	35
+4.6.2.1 请求方向	35
+4.6.2.2 请求方式	35
+4.6.2.3 请求内容	35
+4.6.2.4 请求响应	35
+4.6.3、修改维保单位	35
+4.6.3.1 请求方向	35
+4.6.3.2 请求方式	35
+4.6.3.3 请求内容	35
+4.6.3.4 请求响应	36
+4.6.4、删除维保单位	36
+4.6.4.1 请求方向	36
+4.6.4.2 请求方式	36
+4.6.4.3 请求内容	36
+4.6.4.4 请求响应	36
+4.6.5、获取维保人员列表	36
+4.6.5.1 请求方向	36
+4.6.5.2 请求方式	36
+4.6.5.3 请求内容	36
+4.6.5.4 请求响应	36
+4.6.6、新增维保人员	37
+4.6.6.1 请求方向	37
+4.6.6.2 请求方式	37
+4.6.6.3 请求内容	37
+4.6.6.4 请求响应	37
+4.6.7、修改维保人员	37
+4.6.7.1 请求方向	37
+4.6.7.2 请求方式	37
+4.6.7.3 请求内容	37
+4.6.7.4 请求响应	37
+4.6.8、删除维保人员	38
+4.6.8.1 请求方向	38
+4.6.8.2 请求方式	38
+4.6.8.3 请求内容	38
+4.6.8.4 请求响应	38
+4.6.9、查找维保人员	38
+4.6.9.1 请求方向	38
+4.6.9.2 请求方式	38
+4.6.9.3 请求内容	38
+4.6.9.4 请求响应	38
+4.6.10、获取设备维保人员列表	39
+4.6.10.1 请求方向	39
+4.6.10.2 请求方式	39
+4.6.10.3 请求内容	39
+4.6.10.4 请求响应	39
+4.6.11、新增设备维保人员	39
+4.6.11.1 请求方向	39
+4.6.11.2 请求方式	39
+4.6.11.3 请求内容	39
+4.6.11.4 请求响应	40
+4.6.12、删除设备维保人员	40
+4.6.12.1 请求方向	40
+4.6.12.2 请求方式	40
+4.6.12.3 请求内容	40
+4.6.12.4 请求响应	40
+4.6.13、根据设备类型获取设备维保人员列表	40
+4.6.13.1 请求方向	40
+4.6.13.2 请求方式	40
+4.6.13.3 请求内容	40
+4.6.13.4 请求响应	40
+4.6.14、给维保人员发送维保提醒（未实现）	41
+4.6.14.1 请求方向	41
+4.6.14.2 请求方式	41
+4.6.14.3 请求内容	41
+4.6.14.4 请求响应	41
+4.7．告警模块	41
+4.7.1、获取告警规则列表	41
+4.7.1.1 请求方向	41
+4.7.1.2 请求方式	41
+4.7.1.3 请求内容	41
+4.7.1.4 请求响应	41
+4.7.2、新增告警规则	42
+4.7.2.1 请求方向	42
+4.7.2.2 请求方式	42
+4.7.2.3 请求内容	42
+4.7.2.4 请求响应	43
+4.7.3、修改告警规则	43
+4.7.3.1 请求方向	43
+4.7.3.2 请求方式	43
+4.7.3.3 请求内容	43
+4.7.3.4 请求响应	43
+4.7.4、删除告警规则	44
+4.7.4.1 请求方向	44
+4.7.4.2 请求方式	44
+4.7.4.3 请求内容	44
+4.7.4.4 请求响应	44
+4.7.5、获取告警日志列表	44
+4.7.5.1 请求方向	44
+4.7.5.2 请求方式	44
+4.7.5.3 请求内容	44
+4.7.5.4 请求响应	44
+4.7.6、根据设备类型获取告警日志列表	45
+4.7.6.1 请求方向	45
+4.7.6.2 请求方式	45
+4.7.6.3 请求内容	45
+4.7.6.4 请求响应	45
+4.8．型号模块	45
+4.8.1、获取型号列表	45
+4.8.1.1 请求方向	45
+4.8.1.2 请求方式	45
+4.8.1.3 请求内容	45
+4.8.1.4 请求响应	45
+4.8.2、新增型号	46
+4.5.2.1 请求方向	46
+4.5.2.2 请求方式	46
+4.5.2.3 请求内容	46
+4.5.2.4 请求响应	46
+4.8.3、修改型号	46
+4.5.3.1 请求方向	46
+4.5.3.2 请求方式	46
+4.5.3.3 请求内容	46
+4.5.3.4 请求响应	46
+4.8.4、删除型号	47
+4.5.4.1 请求方向	47
+4.5.4.2 请求方式	47
+4.5.4.3 请求内容	47
+4.5.4.4 请求响应	47
+4.9. 租户设备类型	47
+4.9.1、获取租户设备类型列表	47
+4.9.1.1 请求方向	47
+4.9.1.2 请求方式	47
+4.9.1.3 请求内容	47
+4.9.1.4 请求响应	47
+4.9.2、新增租户设备类型	47
+4.9.2.1 请求方向	47
+4.9.2.2 请求方式	48
+4.9.2.3 请求内容	48
+4.9.2.4 请求响应	48
+4.9.3、删除租户设备类型	48
+4.9.3.1 请求方向	48
+4.9.3.2 请求方式	48
+4.9.3.3 请求内容	48
+4.9.3.4 请求响应	48
+4.10. 告警上报与处理	48
+4.10.1．告警上报	48
+4.10.1.1 请求方向	48
+4.10.1.2 请求方式	48
+4.10.1.3 请求内容	49
+4.10.1.4 请求响应	49
+4.10.1.5 处理方式	49
+4.10.2．告警处理	50
+4.10.2.1 请求方向	50
+4.10.2.2 请求方式	50
+4.10.2.3 请求内容	50
+4.10.2.4 请求响应	50
+4.10.2.5 处理过程	51
+4.11.设备登录授权	52
+4.11.1．设备授权	52
+4.11.1.1 请求方向	52
+4.11.1.2 请求方式	52
+4.11.1.3 请求内容	52
+4.11.1.4 请求响应	52
+4.12、拓扑	52
+4.12.1．获取拓扑列表	52
+4.12.1.1 请求方向	52
+4.12.1.2 请求方式	52
+4.12.1.3 请求内容	52
+4.12.1.4 请求响应	52
+4.12.2．新增拓扑	53
+4.12.2.1 请求方向	53
+4.12.2.2 请求方式	53
+4.12.2.3 请求内容	53
+4.12.2.4 请求响应	53
+4.12.3．修改拓扑	54
+4.12.3.1 请求方向	54
+4.12.3.2 请求方式	54
+4.12.3.3 请求内容	54
+4.12.3.4 请求响应	54
+4.12.4．删除拓扑	54
+4.12.4.1 请求方向	54
+4.12.4.2 请求方式	54
+4.12.4.3 请求内容	54
+4.12.4.4 请求响应	54
+4.12.5．拓扑详情	54
+4.12.5.1 请求方向	54
+4.12.5.2 请求方式	54
+4.12.5.3 请求内容	55
+4.12.5.4 请求响应	55
+4.13、拓扑负责人	55
+4.13.1．查看拓扑负责人	55
+4.13.1.1 请求方向	55
+4.13.1.2 请求方式	55
+4.13.1.3 请求内容	55
+4.13.1.4 请求响应	55
+4.13.2．新增拓扑负责人	56
+4.13.2.1 请求方向	56
+4.13.2.2 请求方式	56
+4.13.2.3 请求内容	56
+4.13.2.4 请求响应	56
+4.13.3．修改拓扑负责人	56
+4.13.3.1 请求方向	56
+4.13.3.2 请求方式	56
+4.13.3.3 请求内容	56
+4.13.3.4 请求响应	56
+4.13.4．删除拓扑负责人	57
+4.13.4.1 请求方向	57
+4.13.4.2 请求方式	57
+4.13.4.3 请求内容	57
+4.13.4.4 请求响应	57
+4.14、拓扑类别	57
+4.14.1 获取拓扑类别列表	57
+4.14.1.1 请求方向	57
+4.14.1.2 请求方式	57
+4.14.1.3 请求内容	57
+4.14.1.4 请求响应	57
+4.14.2 新增拓扑类别	57
+4.14.2.1 请求方向	57
+4.14.2.2 请求方式	57
+4.14.2.3 请求内容	57
+4.14.2.4 请求响应	58
+4.14.3 修改拓扑类别	58
+4.14.3.1 请求方向	58
+4.14.3.2 请求方式	58
+4.14.3.3 请求内容	58
+4.14.3.4 请求响应	58
+4.14.4 删除拓扑类别	58
+4.14.4.1 请求方向	58
+4.14.4.2 请求方式	58
+4.14.4.3 请求内容	58
+4.14.4.4 请求响应	58
+5.处理过程	59
+5.1.告警过程	59
+5.2.告警处理	59
+5.3.维保过程	59
+6. 错误码	59
+7. 配置项	59
+
+修订记录
+修订时间	修订内容	修订人
+2018-06-12	device_type由int修改为string	徐键
+2018-06-20	删除 2.2.9
+新增 2.2.13
+修改 2.2.7
+修改 4.7.1、4.7.2、4.7.3
+修改 4.10.1、4.10.2
+hp_devices_alarm_rules 新增min、max，修改4.7
+修改2.2，新增building、floor、room，修改4.4 	徐键
+2018-06-25	新增4.11.设备登录授权	徐键
+2018-09-03	1、修改2.2.13 hp_devices_alarm
+2、新增2.2.16. 设备告警处理hp_devices_alarm_process
+3、修改4.10.1、4.10.2
+4、新增4.10.3-4.10.7	徐键
+2018-09-04	1、修改2.2.1
+2、修改2.2.2
+3、新增 2.2.14、2.2.15、2.217
+4、修改4.4.1、4.4.2、4.4.4、4.4.5、
+5、新增4.4.6、4.4.7、4.4.8、
+6、新增4.12、4.13、4.14	徐键
+2018-09-05	aes128_key修改为secret_key	徐键
+2018-10-08	修改2.2.2
+新增2.2.14-2.2.20
+新增4.8	徐键
+2018-10-12	hp_devices_topology_category_belongs新增topo_id字段	徐键
+2018-10-15	2.2.12 新增mf_id
+修改4.8.1、4.8.2、4.8.3	徐键
+2018-10-17	新增4.15、4.16	徐键
+2018-10-18	新增4.11.2	徐键
+2018-10-22	新增4.16.5、4.16.6、4.15.10、4.15.11	
+2018-10-31	修改4.4.8	
+2018-12-14	修改2.2.7
+修改2.2.8，修改status描述，新增remark字段
+修改2.2.13，修改status描述，except_level描述，习总能rule_type、rule_id字段
+修改2.2.16，新增remark描述
+修改2.2.19，新增first_access字段，修改status描述
+新增2.2.27
+新增4.4.10
+新增4.4.11
+修改4.7.5
+修改4.7.6
+修改4.10.1
+修改4.10.2
+修改4.10.3
+新增4.10.4
+修改4.11.1
+修改4.14.2
+修改4.14.3
+新增4.14.5
+新增4.15.12
+修改2.2.1
+新增4.14.6	徐键
+2018-12-20	修改4.14.2
+修改4.14.3
+修改4.14.5
+新增4.14.7
+新增4.14.8
+新增2.2.28	徐键
+2018-12-21	4.7.5新增remark	徐键
+2018-12-24	4.16.6.4新增serial	徐键
+2018-12-25	新增4.16.7-4.16.-12
+4.7.6新增remark
+2.2.8 attime修改为time	徐键
+2018-12-26	2.2.18、2.2.19、2.2.20、2.2.21、2.2.22、2.2.23、2.2.24、2.2.25、2.2.26、2.2.27、2.2.28新增last_update
+4.16.6 新增name	徐键
+2018-12-27	2.2.2新增location、observer
+新增2.2.29
+新增4.12.7	徐键
+2018-12-27	4.4.9为了区分设备和网关搜索，添加字段	徐键
+2019-01-02	4.12.1.4新增topo_category_id、topo_category_primary	徐键
+2019-01-02	修改4.15.2，新增topo_id
+新增4.15.13
+hp_edge_gateway_topo、hp_base_station_topo新增primary	徐键
+2019-01-22	新增4.12.8	徐键
+2019-01-23	修改4.10.1，新增字段attime
+修改4.10.3，新增字段attime	徐键
+2019-01-28	修改2.2.1，新增disable	徐键
+2019-01-29	修改4.4.10，删除topo_id参数	徐键
+2019-02-01	新增4.3.5、4.3.6	徐键
+2019-03-06	修改2.2.3、4.5.1、4.5.2新增mf_contact，mf_phone	朱永亮
+2019-04-04	修改2.2.3、4.5.1、4.5.2、4.5.3新增mf_logo、mf_website	徐键，已完成
+2019-04-05	新增
+4.17、绑定设备
+2.2.30、我的绑定设备	徐键，已完成
+2019-04-23	2.2.3新增mf_qrcode
+4.8.5、型号详情
+4.6.15、维保单位详情
+4.5.5、制造商详情	徐键，已完成
+2019-05-22	将数据表的date类型修改为timestamp	徐键
+2019-05-23	status新增8-运行中
+新增4.4.12
+新增4.18	徐键
+		
+
+1.文档介绍
+1.1．文档目的
+
+1.2．文档范围
+
+1.3．读者对象
+
+1.4．参考文献
+1.5．缩写与术语解释
+缩写及术语	解 释
+	
+	
+	
+	
+	
+2.总体结构
+2.1.总览
+
+3.数据库物理设计
+*提示：
+（1）主要是设计表结构。一般地，实体对应于表，实体的属性对应于表的列，实体之间的关系成为表的约束。逻辑设计中的实体大部分可以转换成物理设计中的表，但是它们并不一定是一一对应的。
+（2）对表结构进行规范化处理（第三范式）。
+（3）使用数据库设计工具设计数据库时，可以直接连接到其文件。
+2.1．表汇总
+
+
+表名	功能说明
+表A	
+表B	
+。。。	
+表N	
+2.2．表结构详细
+2.2.1. 设备类型列表hp_devices_collection
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+collect_id	列表ID	varchar(32)	非空	主键
+device_type	设备类型
+0-网关，保留	varchar(32)	非空	非空，索引，值唯一
+tenant_id	租户ID	varchar(32)		
+name	类型名称	varchar(255)	非空	非空
+meta_device_id	profile元数据ID	varchar(32)	空	索引
+sketch	设备示意图URL	varchar(1024)	空	
+disable	是否禁用
+0-否
+1-是	tinyint	空	默认为0
+补充说明		
+
+
+2.2.2. 设备表hp_devices
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+dev_id	设备ID	varchar(32)	非空	主键
+serial	物联网终端唯一识别码	varchar(64)	非空	索引
+alias	编号或者别名	varchar(32)	非空	索引
+device_type	设备类型，来自于设备类型列表下拉	varchar(32)	非空	索引
+tenant_id	租户ID	varchar(32)	非空	索引
+branch_id	分支ID	varchar(32)	空	索引
+location	安装位置	varchar(255)	空	
+building	幢数	varchar(32)	空	
+floor	层数	varchar(32)	空	
+room	房间	varchar(32)	空	
+secret_key	加解密密钥	varchar(256)	空	
+longitude	经度	decimal(10,7)	空	默认为0
+latitude	纬度	decimal(10,7)	空	默认为0
+mf_id	制造商ID	varchar(32)	空	索引
+model_id	型号ID	varchar(32)	空	索引
+mtc_id	维保单位ID	varchar(32)	空	索引
+last_update	最近更新时间	timestamp		
+observer	监测对象	varchar(32)		
+补充说明		
+2.2.3. 制造商hp_devices_mfs
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+mf_id	制造商ID	varchar(32)	非空	主键
+name	制造商名称	varchar(255)	非空	
+location	制造商地址	varchar(1024)		
+last_update	最近更新时间	timestamp		
+mf_contact	制造商联系人	varchar(128)		
+mf_phone	制造商联系电话	varchar(32)		
+mf_logo	制造商LOGO	varchar(1024)		
+mf_website	制造商官网地址	varchar(256)		
+mf_qrcode	制造商二维码地址	varchar(1024)		
+补充说明		
+
+2.2.4. 维保单位hp_maintains_company
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+mtc_id	维保单位ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)		索引
+name	维保单位名称	varchar(255)	非空	
+location	维保单位地址	varchar(1024)		
+last_update	最近更新时间	timestamp		
+补充说明		
+
+2.2.5. 维保人员hp_maintains_employee
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+employee_id	维保单位ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+mtc_id	维保单位ID	varchar(32)	非空	索引
+name	维保人员名称	varchar(32)	非空	
+phone	维保人员手机号码	varchar(32)		
+mail	维保人员邮箱	varchar(255)		
+last_update	最近更新时间	timestamp		
+补充说明		
+2.2.6. 设备维保人员hp_devices_maintains_employee
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+device_me_id	设备维保人员ID	varchar(23)	非空	主键
+tenant_id	租户ID	varchar(32)		索引
+device_type	设备类型	varchar(32)	非空	索引
+employee_id	维保人员ID	varchar(32)	非空	索引
+action	维保动作
+0x00 -发送短信
+0x01 -发送邮件	int	非空	默认为0
+last_update	最近更新时间	timestamp		
+				
+补充说明		
+
+2.2.7. 设备告警规则hp_devices_alarm_rules（暂不使用）
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+rule_id	规则ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)		索引，通配为*
+device_type	设备类型	varchar(32)	非空	索引
+min	最小值	double		
+max	最大值	double		
+action	告警动作
+0x00 -推送通知
+0x01 -发送短信
+0x02 -发送邮件	int	非空	默认为0
+always	是否一直发送
+0-否
+1-是	int	非空	默认为0
+escalate	是否反馈给上一级
+0-否
+1-是	int	非空	默认为0
+sms_id	短信ID 
+当action为0x01时，指定	varchar(32)	空	默认为空
+resend_duration	重发周期，单位秒，默认30	int	空	默认30s
+当always为1时，循环发送
+resendCount	重发次数，缺省为3	int	非空	默认为3
+如果resendCount重发次数达到边界，需要视escalate是否为1，启动向上一级的反馈
+last_update	最近更新时间	timestamp		
+				
+				
+补充说明		
+
+2.2.8. 设备告警历史hp_devices_alarm_logs
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+log_id	日志ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)		索引,通用项目填写*
+device_type	设备类型	varchar(32)	非空	索引
+serial	物联网终端唯一识别码	varchar(64)	非空	
+attime	告警时间	int	非空	
+content	告警内容	varchar(1024)	空	
+status	设备状态
+0-未确认
+1-已确认
+2-已复归
+3-故障
+4-告警解除
+5-掉线
+6-屏蔽
+7-封锁
+99-正常	int	非空	
+remark	处理备注	varchar(1024)	空	
+补充说明		
+2.2.11. 租户设备类型表hp_tenants_devices_collections（暂不使用）
+注意：
+hp_tenants_devices_collections数据是hp_devices_collection的子集。
+不同租户可以定制需要展示的设备类型
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+collect_id	列表ID	varchar(32)	非空	主键
+device_type	设备类型	varchar(32)	非空	非空，索引，值唯一
+name	设备名称	varchar(255)	非空	非空
+tenant_id	租户ID	varchar(32)	非空	
+补充说明		
+2.2.12. 型号表hp_devices_models
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+model_id	型号ID	varchar(32)	非空	主键
+mf_id	制造商ID	varchar(32)	非空	索引
+name	型号名称	varchar(32)	非空	
+description	型号描述	varchar(1024)		
+补充说明		
+2.2.13. 设备告警hp_devices_alarm
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	告警ID	varchar(32)	非空	主键
+device_type	传感器类型	varchar(32)	传感器类型	索引
+serial	物联网终端唯一识别码	varchar(64)	非空	索引
+tenant_id	租户ID	varchar(32)	非空	索引
+attime	告警时间	int，秒	非空	
+status	设备状态
+0-未确认
+1-已确认
+2-已复归
+3-故障
+
+5-掉线
+6-屏蔽
+7-封锁
+8-运行中
+9-空闲
+99-正常	int	非空	索引
+raw	设备原始数据	JSON格式的string	空	
+alarm_type	告警类型
+0-预警
+1-告警	int	非空	0为默认值
+except_type	异常类型
+0：数据异常
+1：设备异常	int	非空	0为默认值
+except_level	异常级别
+1：危急
+2：严重
+3：一般
+4：告知	int	空	当except_type为0时，设置，索引
+except_reason	告警原因	string	空	按照拓扑层次进行组织
+rule_type	告警触发的规则类型
+0-无
+1-规则配置
+2-Hub规则	int	空	
+rule_id	规则ID	varchar(32)	空	
+alarm_status	告警原始状态	int	非空	
+				
+2.2.14. 拓扑表hp_devices_topology
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+topo_id	拓扑ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+name	拓扑名称	varchar(255)	非空	租户内唯一
+parent_topo_id	父拓扑ID	varchar(32)	空	索引
+longitude	经度	float	空	
+latitude	纬度	float	空	
+sketch	示意图URL	varchar(1024)	空	
+location	拓扑地址	varchar(1024)	空	
+topology	拓扑值	int(11)	非空	默认为0[拓扑值对于大型站点，不适用，去除]
+topo_category_id	拓扑类别	varchar(32)	非空	索引
+create_user_id	创建用户ID	varchar(32)	空	
+create_date	创建时间	timestamp	空	
+last_update	最后修改时间	timestamp	空	
+update_user_id	修改用户ID	varchar(32)	空	
+				
+拓扑值的计算规则：
+根拓扑的值为0，每产生一个下级拓扑，拓扑值在上级拓扑值得基础上*10，再进行同级递增。
+如下的拓扑结构：
+[拓扑值对于大型站点，不适用，去除]
+
+2.2.15. 拓扑负责人hp_devices_topology_heads
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+head_id	责任人ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+topo_id	拓扑ID	varchar(32)	非空	索引
+dep_id	部门ID[通过现场考察，发现实际维护中，如变电站这些都是以班组为单位，班组是企业中基本作业单位,是企业内部最基层的劳动和管理组织]	varchar(32)	非空	索引
+create_user_id	创建用户ID	varchar(32)	空	
+create_date	创建时间	timestamp	空	
+last_update	最后修改时间	timestamp	空	
+update_user_id	修改用户ID	varchar(32)	空	
+				
+2.2.16. 设备告警处理hp_devices_alarm_process
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	处理ID	varchar(32)	非空	主键
+alarm_id	告警源ID	varchar(32)	非空	索引
+user_id	处理人	varchar(32)	非空	索引
+processtime	处理时间	int		
+status	处理状态：
+1-告警正在处理
+2-告警处理完成	int	非空	
+remark	处理备注	varchar(1024)	空	
+				
+2.2.17. 拓扑类别hp_devices_topology_category
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+category_id	拓扑类别ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+name	类别名称	varchar(255)	非空	租户内唯一
+category_primary	是否是主要类别
+0:否
+1:是
+此处主要类别是指需要在Web上展示的类别	tinyint	非空	默认为0
+2.2.18、拓扑设备表hp_devices_topology_belongs
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+branch_id	分支ID	varchar(32)	空	索引
+dev_id	设备ID	varchar(32)	非空	索引
+serial	物联网终端唯一识别码	varchar(64)	非空	索引
+topo_id	拓扑ID	varchar(32)	空	索引
+topo_category_id	拓扑类别ID	varchar(32)	空	索引
+belongs	是否为当前设备归属的拓扑
+0:否
+1:是	tinyint	非空	索引
+last_update	最近更新时间	int		
+				
+补充说明		
+
+2.2.19、设备状态表hp_devices_status
+此表维护所有上报数据的设备状态
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+serial	物联网终端唯一识别码	varchar(64)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+first_access	首次接入时间，秒	int32	空	
+last_update	最近更新时间，秒	int32	非空	
+dev_id	设备ID	varchar(32)	空	索引
+status	设备状态
+0-未确认
+1-已确认
+2-已复归
+3-故障
+
+5-掉线
+6-屏蔽
+7-封锁
+8-运行中
+9-空闲
+99-正常	int	非空	默认99
+status对应Web的词汇
+值	数据库含义	Web显示值
+0	未确认	未确认
+1	已确认	已确认
+2	已复归	已复归
+3	故障	
+5	掉线	
+6	屏蔽	
+7	封锁	
+8	运行中	根据各项目制作脚本判断
+9	空闲	根据各项目制作脚本判断
+99	正常	无
+2.2.20、拓扑类别设备表hp_devices_topology_category_belongs
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+branch_id	分支ID	varchar(32)	空	索引
+dev_id	设备ID	varchar(32)	非空	索引
+serial	物联网终端唯一识别码	varchar(64)	非空	索引
+topo_category_id	拓扑类别ID	varchar(32)	非空	索引
+topo_id	拓扑ID	varchar(32)	空	索引
+last_update	最近更新时间	int		
+				
+补充说明		
+2.2.21、对象存储表hp_devices_objects
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+object_id	ID	varchar(32)	非空	主键
+object_type	对象类型
+1:image
+2:video	tinyint	非空	索引
+tenant_id	租户ID	varchar(32)	非空	索引
+source_type	源类型
+1:设备安装图	tinyint	非空	索引
+source_id	归属的源ID	varchar(32)	非空	索引
+url	资源URL	varchar(1023)	非空	
+last_update	最近更新时间	int		
+				
+补充说明		
+2.2.22. 基站配置表hp_base_station
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+base_id	基站ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+name	基站名称	varchar(256)	非空	
+ip	基站IP地址	varchar(32)	非空	
+EUI	基站EUI标识	varchar(32)	非空	唯一、索引
+last_update	最近更新时间	date		
+				
+补充说明		
+2.2.23. 基站拓扑关联表hp_base_station_topo
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	关联ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+base_id	基站ID	varchar(32)	非空	索引
+top_id	拓扑ID	varchar(32)	非空	
+last_update	最近更新时间	int		
+belongs	是否为当前基站归属的拓扑
+0:否
+1:是	tinyint	非空	索引
+				
+补充说明		
+2.2.24. 基站设备关联表hp_base_station_device
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	关联ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+base_id	基站ID	varchar(32)	非空	索引
+base_dev_addr	基站对于每设备配置的设备ID	varchar(32)	非空	
+dev_id	设备ID	varchar(32)	非空	索引
+secret_key	加解密密钥，
+Lora对于每设备配置的加解密秘钥	varchar(256)	空	
+last_update	最近更新时间	int		
+				
+补充说明		
+2.2.25. 网关拓扑配置表hp_edge_gateway_topo
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	关联ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+gateway_id	网关ID	varchar(32)	非空	
+top_id	拓扑ID	varchar(32)	非空	
+last_update	最近更新时间	timestamp		
+belongs	是否为当前基站归属的拓扑
+0:否
+1:是	tinyint	非空	索引
+				
+补充说明		
+
+2.2.26. 网关设备配置表hp_edge_gateway_device
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	关联ID	varchar(32)	非空	主键
+tenant_id	租户ID	varchar(32)	非空	索引
+gateway_id	网关ID	varchar(32)	非空	索引
+device_class	设备类型
+0-设备
+1-基站	int	非空	默认为1
+source_id	源ID
+当设备类型为0时，表示dev_id
+当设备类型为1时，表示base_id	varchar(32)	非空	索引
+last_update	最近更新时间	int		
+				
+补充说明		
+2.2.27. 拓扑设备类型表hp_devices_topology_device_type
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	ID	varchar(32)	非空	主键
+category_id	拓扑类别ID	varchar(32)	非空	索引
+tenant_id	租户ID	varchar(32)	非空	索引
+device_type	设备类型，来自于设备类型列表下拉	varchar(32)	非空	
+last_update	最近更新时间	int		
+				
+2.2.28. 拓扑类别关联表hp_devices_topology_relations
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	ID	varchar(32)	非空	主键
+primay_category_id	拓扑类别ID	varchar(32)	非空	索引
+sub_category_id	子拓扑类别ID	varchar(32)	非空	索引
+tenant_id	租户ID	varchar(32)	非空	索引
+last_update	最近更新时间	int		
+				
+2.2.29. 拓扑层次表hp_devices_topology_hierarchy
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+id	层次ID	varchar(32)	非空	主键
+topo_id	拓扑ID	varchar(32)	非空	索引
+tenant_id	租户ID	varchar(32)	非空	索引
+upper_topo_id	上层拓扑ID	varchar(32)	空	索引
+topo_category_id	拓扑类别ID，当前拓扑所属层次的拓扑类别	varchar(32)	空	索引
+				
+2.2.30. 我的绑定设备hp_user_devices
+表名				
+列名	含义	数据类型
+（精度范围）	空/非空	约束条件
+user_id	用户ID	varchar(32)	非空	主键
+dev_id	设备ID	varchar(32)	非空	主键
+serial	物联网终端唯一识别码	varchar(64)	非空	索引
+tenant_id	租户ID	varchar(32)	非空	索引
+last_update	最近更新时间	timestamp		
+				
+
+2.3．安全性设计
+*提示：
+提高软件系统的安全性应当从“管理”和“设计”两方面着手。这里仅考虑数据库的安全性设计。
+2.4．防止用户直接操作数据库的方法
+*提示：
+用户只能使用帐号登陆到应用软件，通过应用软件访问数据库，而没有其它操作数据库的途径。
+2.5．用户帐号密码的加密方法
+*提示：
+需要对用户帐号的密码进行加密处理，确保在任何地方都不会出现密码的明文。
+2.6．角色与权限
+*提示：
+确定每个角色对数据库表的操作权限，如创建、检索、更新、删除等。每个角色拥有刚好满足自己角色范围内权限，不得超越权限。在应用时再为用户分配角色，如果兼任多个角色的情况，则每个用户的权限等于他所兼角色的权限总和。
+角色	可访问的表与列	操作权限
+
+角色A		
+		
+		
+
+角色B		
+		
+		
+2.7．优化
+*提示：
+分析并优化数据库的“时－空”效率，尽可能地提高“处理速度”并且降低“数据占用空间”，具体如下：
+1.分析“时－空”效率的瓶颈，找出优化对象（目标），并确定优先级。
+2.当优化对象（目标）之间存在对抗时，给出折衷方案。
+3.给出优化的具体措施，例如优化数据库环境参数，对表格进行反规范化处理等。
+优先级	优化对象（目标）	措施
+		
+		
+		
+3.界面设计
+3.1．界面的关系图和工作流程图
+*提示：
+1.给所有界面视图分配唯一的标识符。
+2.绘制各个界面之间的关系图和工作流程图。
+3.2．主界面
+*提示：
+1.绘制主界面的视图，指定编号；
+2.说明主界面中所有对象的功能和操作方式；
+3.3．子界面
+3.3.1．子界面A
+*提示：
+1.绘制子界面A的视图，指定编号；
+2.说明子界面A中所有对象的功能和操作方式；
+3.3.2．子界面B
+3.4. 拓扑理解
+（1）、假设现在的拓扑类别规划如下：
+name	category_primary
+配电房	1
+户外环网箱	1
+箱式变电站	1
+开关站	1
+电缆及通道	1
+柱上变台	1
+柱上开关	1
+高压开关柜	0
+直流系统	0
+空间环境	0
+变压器	0
+环网柜	0
+环境	0
+电缆	0
+电缆井	0
+杆上变压器	0
+JP柜	0
+柱上开关	0
+则hp_devices_topology_category表记录如下：
+category_id	tenant_id	name	category_primary
+category_id_1	**	配电房	1
+category_id_2	**	户外环网箱	1
+category_id_3	**	箱式变电站	1
+category_id_4	**	开关站	1
+category_id_5	**	电缆及通道	1
+category_id_6	**	柱上变台	1
+category_id_7	**	柱上开关	1
+category_id_8	**	高压开关柜	0
+category_id_9	**	直流系统	0
+category_id_10	**	空间环境	0
+category_id_11	**	变压器	0
+category_id_12	**	环网柜	0
+category_id_13	**	环境	0
+category_id_14	**	电缆	0
+category_id_15	**	电缆井	0
+category_id_16	**	杆上变压器	0
+category_id_17	**	JP柜	0
+category_id_18	**	柱上开关	0
+（2）、假设现在的拓扑规划hp_devices_topology如下
+
+假设现在在拓扑top1-1-1-1-1插入一个传感器sensor1，在拓扑top1-1-2-1-1插入一个传感器sensor2，在拓扑top1-1-2-2-1下插入传感器sensor3
+则hp_devices_topology_belongs表插入记录如下：
+serial	topo_id	topo_category_id	belongs
+sensor1	top1-1-1-1-1	category_id_8	1
+sensor1	top1-1-1-1	category_id_4	0
+sensor1	top1-1-1	category_id_4	0
+sensor1	top1-1	category_id_4	0
+sensor1	top1	category_id_4	0
+sensor2	top1-1-2-1-1	category_id_18	1
+sensor2	top1-1-2-1	category_id_7	0
+sensor2	top1-1-2	category_id_7	0
+sensor2	top1-1	category_id_7	0
+sensor2	top1	category_id_7	0
+sensor3	top1-1-2-2-1	category_id_8	0
+sensor3	top1-1-2-2	category_id_4	0
+sensor3	top1-1-2	category_id_4	0
+sensor3	top1-1	category_id_4	0
+sensor3	top1	category_id_4	0
+
+则hp_devices_topology_category_belongs表插入记录如下：
+serial	topo_category_id	topo_id
+sensor1	category_id_8	top1-1-1-1-1
+sensor1	category_id_4	top1-1-1-1
+sensor2	category_id_7	top1-1-2-1
+sensor2	category_id_18	top1-1-2-1-1
+sensor3	category_id_8	top1-1-2-2-1
+sensor3	category_id_4	top1-1-2-2
+则hp_devices_topology_hierachy表插入记录如下（以top1-1-1-1-1为例）：
+topo_id	upper_topo_id	topo_category_id
+top1-1	top1	
+top1-1-1	top1-1	
+top1-1-1	top1	
+top1-1-1-1	top1-1-1	category_id_4
+top1-1-1-1	top1-1	category_id_4
+top1-1-1-1	top1	category_id_4
+top1-1-1-1-1	top1-1-1-1	category_id_8
+top1-1-1-1-1	top1-1-1	category_id_8
+top1-1-1-1-1	top1-1	category_id_8
+top1-1-1-1-1	top1	category_id_8
+
+4.模块设计
+4.1．模块汇总表
+*提示：这里模块是指相对独立的软件设计单元，例如对象类、函数包等等。
+子系统A
+模块编号及名称	功能简述
+	
+	
+	
+子系统B
+模块编号及名称	功能简述
+	
+	
+	
+4.2．模块关系图
+*提示：参考体系结构设计文档
+4.3．设备类型模块
+以下请求为操作hp_devices_collections表
+模块编号、名称	
+功能描述	
+接口与属性	*提示：用专业的设计（开发）工具来设计本模块的接口与属性，说明函数功能、输入参数、输出参数、返回值等。此处粘贴即可。
+数据结构与算法	*提示：不论是采用经典的还是专用的数据结构与算法，都应该作必要的描述。不仅用于指导程序的实现，还可以让人们清楚地了解该对象类是如何设计的。
+补充说明	
+4.3.1、获取设备类型列表
+4.3.1.1 请求方向
+Web --> Service
+4.3.1.2 请求方式
+GET
+api/devices/collection/list?offset=?&limit=?
+4.3.1.3 请求内容
+无
+4.3.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	collect_id	string	返回的ID
+	device_type	string	设备类型
+	name	string	设备名称
+	meta_device_id	string	设备元数据ID
+4.3.1.5 处理过程
+返回disable的设备类型
+4.3.2、新增设备类型（废弃不用）
+4.3.2.1 请求方向
+Web --> Service
+4.3.2.2 请求方式
+POST
+api/devices/collection/add
+4.3.2.3 请求内容
+字段	类型	含义
+data	{}	
+	device_type	string	设备类型
+	name	string	设备名称
+	meta_device_id	string	设备元数据ID
+
+4.3.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	collect_id	string	返回的图片URL
+4.3.3、修改设备类型（废弃不用）
+4.3.3.1 请求方向
+Web --> Service
+4.3.3.2 请求方式
+PUT
+api/devices/collection/update/{collect_id}
+4.3.3.3 请求内容
+字段	类型	含义
+data	{}	
+	device_type	string	设备类型
+	name	string	设备名称
+	meta_device_id	string	设备元数据ID
+
+4.3.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.3.4、删除设备类型（废弃不用）
+4.3.4.1 请求方向
+Web --> Service
+4.3.4.2 请求方式
+DELETE
+api/devices/collection/delete/{collect_id}
+4.3.4.3 请求内容
+
+4.3.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.3.5、获取所有的设备类型
+4.3.5.1 请求方向
+Web --> Service
+4.3.5.2 请求方式
+GET
+api/devices/collection/list/all
+4.3.5.3 请求内容
+无
+4.3.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	collect_id	string	返回的ID
+	device_type	string	设备类型
+	name	string	设备名称
+	meta_device_id	string	设备元数据ID
+4.3.5.5 处理过程
+返回所有的设备类型
+4.3.6、获取启用的设备类型
+4.3.6.1 请求方向
+Web --> Service
+4.3.6.2 请求方式
+GET
+api/devices/collection/list/enable
+4.3.6.3 请求内容
+无
+4.3.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	collect_id	string	返回的ID
+	device_type	string	设备类型
+	name	string	设备名称
+	meta_device_id	string	设备元数据ID
+4.3.6.5 处理过程
+返回disable=0的所有设备类型
+
+4.4．设备模块
+4.4.1、获取设备列表
+4.4.1.1 请求方向
+Web --> Service
+4.4.1.2 请求方式
+GET
+api/devices/list?offset=?&limit=?
+4.4.1.3 请求内容
+无
+4.4.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	topology	string	设备的拓扑
+	topo_id	string	拓扑ID
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+	can_delete	int	是否能删除
+0:否
+1:是
+	location	string	安装位置
+	observer	string	监测对象
+4.4.2、新增设备
+4.4.2.1 请求方向
+Web --> Service
+4.4.2.2 请求方式
+POST
+api/devices/add
+4.4.2.3 请求内容
+字段	类型	含义
+data	{}	
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	building	string	幢数，可选
+	floor	string	层，可选
+	room	string	房间，可选
+	topo_id	string	拓扑ID，可选
+	secret_key	string	加解密密钥，可选
+	longitude	float	经度
+	latitude	float	纬度
+	mf_id	string	制造商ID
+	model_id	string	型号ID
+	mtc_id	string	维保单位ID
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	location	string	安装位置
+	observer	string	监测对象
+
+4.4.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	dev_id	string	设备ID
+4.4.2.4 处理逻辑
+（1）、首先插入hp_devices数据
+（2）、将安装图片插入hp_devices_objects表
+（3）、插入hp_devices_topology_belongs表，belongs=1
+（4）、根据topo_id递归查询hp_devices_topology，将上级拓扑节点插入hp_devices_topology_belongs，belongs=0；同时根据hp_devices_topology得到topo_category_id，插入hp_devices_topology_category_belongs
+4.4.3、删除设备
+4.4.3.1 请求方向
+Web --> Service
+4.4.3.2 请求方式
+DELETE
+api/devices/delete/{dev_id}
+4.4.3.3 请求内容
+
+4.4.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.4.4、根据设备类型获取设备列表
+4.4.4.1 请求方向
+Web --> Service
+4.4.4.2 请求方式
+GET
+api/devices/type/list?type=?&offset=?&limit=?
+4.4.4.3 请求内容
+无
+4.4.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+	can_delete	int	是否能删除
+0:否
+1:是
+	location	string	安装位置
+	observer	string	监测对象
+
+4.4.5、根据分支获取设备列表
+4.4.5.1 请求方向
+Web --> Service
+4.4.5.2 请求方式
+GET
+api/devices/branch/list?branch=?&offset=?&limit=?
+4.4.5.3 请求内容
+无
+4.4.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	device_type	string	设备类型
+	alias	string	设备别名
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+	can_delete	int	是否能删除
+0:否
+1:是
+	location	string	安装位置
+	observer	string	监测对象
+
+4.4.6、修改设备
+4.4.6.1 请求方向
+Web --> Service
+4.4.6.2 请求方式
+PUT
+api/devices/update/{device_id}
+4.4.6.3 请求内容
+字段	类型	含义
+data	{}	
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	building	string	幢数，可选
+	floor	string	层，可选
+	room	string	房间，可选
+	topo_id	string	拓扑ID，可选
+	secret_key	string	加解密密钥
+	longitude	float	经度
+	latitude	float	纬度
+	mf_id	string	制造商ID
+	model_id	string	型号ID
+	mtc_id	string	维保单位ID
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	location	string	安装位置
+	observer	string	监测对象
+
+4.4.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data		
+	dev_id	string	设备ID
+4.4.7、获取拓扑及其下所有的设备列表
+4.4.7.1 请求方向
+Web --> Service
+4.4.7.2 请求方式
+GET
+api/devices/topology/under/list?topo=?&offset=?&limit=?
+4.4.7.3 请求内容
+无
+4.4.7.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+	location	string	安装位置
+	observer	string	监测对象
+			
+4.4.8、获取设备详情
+4.4.8.1 请求方向
+Web --> Service
+4.4.8.2 请求方式
+GET
+api/devices/detail/{dev_id}
+4.4.8.3 请求内容
+无
+4.4.8.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	topology	string	设备的拓扑
+	topo_id	string	拓扑ID
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_id	string	制造商ID
+	model_id	string	型号ID
+	mtc_id	string	维保单位ID
+	location	string	安装位置
+	observer	string	监测对象
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+			
+			
+			
+4.4.9、根据终端序列号查询设备列表
+4.4.9.1 请求方向
+Web --> Service
+4.4.9.2 请求方式
+POST
+api/devices/search/serial/{serial}
+4.4.9.3 请求内容
+字段	类型	含义
+data	{}	
+	is_hub	int	是否搜索网关
+0-在网关中查找
+1-在设备中查找
+
+4.4.9.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	device_type	string	设备类型
+	alias	string	设备别名
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+	can_delete	int	是否能删除
+0:否
+1:是
+	location	string	安装位置
+	observer	string	监测对象
+			
+4.4.10、批量导入设备
+4.4.10.1 请求方向
+Web --> Service
+4.4.10.2 请求方式
+POST
+api/devices/add/batch
+4.4.10.3 请求内容
+字段	类型	含义
+data	[]	
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支名称
+	building	string	幢数，可选
+	floor	string	层，可选
+	room	string	房间，可选
+	secret_key	string	加解密密钥，可选
+	longitude	float	经度
+	latitude	float	纬度
+	mf_id	string	制造商ID
+	model_id	string	型号ID
+	mtc_id	string	维保单位ID
+	location	string	安装位置
+	observer	string	监测对象
+	topo_level	string	拓扑层级，形如：无锡_滨湖区_连大桥_连大桥1号站_高压柜1#
+
+4.4.10.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.4.11、设备导出
+4.4.11.1 请求方向
+Web --> Service
+4.4.11.2 请求方式
+POST
+api/devices/export
+4.4.11.3 请求内容
+字段	类型	含义
+data	{}	
+	all	int	是否导出全部
+0-否
+1-是
+	serials	[]	导出的设备序列号
+		serial	string	物联网终端唯一识别码
+
+4.4.11.4 请求响应
+返回excel格式
+excel格式如下：
+设备ID	物联网终端唯一识别码	设备类型	设备别名	安装位置	监控对象	分支名称	设备安装图片URL	制造商名称	型号名称	维保单位名称
+							多个以,分隔			
+										
+4.4.12、获取设备状态
+4.4.12.1 请求方向
+Web --> Service
+4.4.12.2 请求方式
+GET
+api/devices/status/{device_id}
+4.4.12.3 请求内容
+无
+4.4.12.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	dev_id	string	设备ID
+	first_access		首次接入时间
+	last_update		最近更新时间
+	dev_id		设备ID
+	status		设备状态
+0-未确认
+1-已确认
+2-已复归
+3-故障
+
+5-掉线
+6-屏蔽
+7-封锁
+8-运行中
+9-空闲
+99-正常
+
+4.5．制造商模块
+4.5.1、获取制造商列表
+4.5.1.1 请求方向
+Web --> Service
+4.5.1.2 请求方式
+GET
+api/devices/mf/list?offset=?&limit=?
+4.5.1.3 请求内容
+无
+4.5.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	mf_id	string	返回的ID
+	name	string	制造商名称
+	location	string	制造商地址
+	mf_contact	string	制造商联系人
+	mf_phone	string	制造商联系电话
+	mf_logo	string	制造商LOGO
+	mf_website	string	制造商网站
+	mf_qrcode	string	制造商二维码
+4.5.2、新增制造商
+4.5.2.1 请求方向
+Web --> Service
+4.5.2.2 请求方式
+POST
+api/devices/mf/add
+4.5.2.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	制造商名称
+	location	string	制造商地址
+	mf_contact	string	制造商联系人
+	mf_phone	string	制造商联系电话
+	mf_logo	string	制造商LOGO
+	mf_website	string	制造商网站
+	mf_qrcode	string	制造商二维码
+
+4.5.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	mf_id	string	返回的ID
+4.5.3、修改制造商
+4.5.3.1 请求方向
+Web --> Service
+4.5.3.2 请求方式
+PUT
+api/devices/mf/update/{mf_id}
+4.5.3.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	制造商名称
+	location	string	制造商地址
+	mf_contact	string	制造商联系人
+	mf_phone	string	制造商联系电话
+	mf_logo	string	制造商LOGO
+	mf_website	string	制造商网站
+	mf_qrcode	string	制造商二维码
+
+4.5.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.5.4、删除制造商
+4.5.4.1 请求方向
+Web --> Service
+4.5.4.2 请求方式
+DELETE
+api/devices/mf/delete/{mf_id}
+4.5.4.3 请求内容
+无
+4.5.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.5.5、制造商详情
+4.5.5.1 请求方向
+Web --> Service
+4.5.5.2 请求方式
+GET
+api/devices/mf/detail/{mf_id}
+4.5.5.3 请求内容
+无
+4.5.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	mf_id	string	制造商ID
+	name	string	制造商名称
+	location	string	制造商地址
+	mf_contact	string	制造商联系人
+	mf_phone	string	制造商联系电话
+	mf_logo	string	制造商LOGO
+	mf_website	string	制造商网站
+	mf_qrcode	string	制造商二维码
+
+4.6．维保模块
+4.6.1、获取维保单位列表
+4.6.1.1 请求方向
+Web --> Service
+4.6.1.2 请求方式
+GET
+api/devices/mtc/list?offset=?&limit=?
+4.6.1.3 请求内容
+无
+4.6.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	mtc_id	string	返回的ID
+	name	string	维保单位名称
+	location	string	维保单位地址
+4.6.2、新增维保单位
+4.6.2.1 请求方向
+Web --> Service
+4.6.2.2 请求方式
+POST
+api/devices/mtc/add
+4.6.2.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	维保单位名称
+	location	string	维保单位地址
+
+4.6.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	mtc_id	string	返回的ID
+4.6.3、修改维保单位
+4.6.3.1 请求方向
+Web --> Service
+4.6.3.2 请求方式
+PUT
+api/devices/mtc/update/{mtc_id}
+4.6.3.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	维保单位名称
+	location	string	维保单位地址
+
+4.6.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.6.4、删除维保单位
+4.6.4.1 请求方向
+Web --> Service
+4.6.4.2 请求方式
+DELETE
+api/devices/mtc/delete/{mtc_id}
+4.6.4.3 请求内容
+无
+4.6.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.6.5、获取维保人员列表
+4.6.5.1 请求方向
+Web --> Service
+4.6.5.2 请求方式
+GET
+api/devices/mtc/employee/list?mtc=?&offset=?&limit=?
+4.6.5.3 请求内容
+无
+4.6.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	employee_id	string	维保人员ID
+	name	string	维保人员名称
+	phone	string	维保人员手机号码
+	mail	string	维保人员邮箱
+4.6.6、新增维保人员
+4.6.6.1 请求方向
+Web --> Service
+4.6.6.2 请求方式
+POST
+api/devices/mtc/employee/add
+4.6.6.3 请求内容
+字段	类型	含义
+data	{}	
+	mtc_id	string	维保单位ID
+	name	string	维保人员名称
+	phone	string	维保人员手机号码
+	mail	string	维保人员邮箱
+
+4.6.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	employee_id	string	维保人员ID
+4.6.7、修改维保人员
+4.6.7.1 请求方向
+Web --> Service
+4.6.7.2 请求方式
+PUT
+api/devices/mtc/employee/update/{employee_id}
+4.6.7.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	维保人员名称
+	phone	string	维保人员手机号码
+	mail	string	维保人员邮箱
+
+4.6.7.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.6.8、删除维保人员
+4.6.8.1 请求方向
+Web --> Service
+4.6.8.2 请求方式
+DELETE
+api/devices/mtc/employee/delete/{employee_id}
+4.6.8.3 请求内容
+
+4.6.8.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.6.9、查找维保人员
+4.6.9.1 请求方向
+Web --> Service
+4.6.9.2 请求方式
+POST
+api/devices/mtc/employee/query?offset=?&limit=?
+4.6.9.3 请求内容
+字段	类型	含义
+data	{}	
+	type	int	查询条件：
+0-通过手机号码
+1-通过邮箱
+2-通过名字
+	parameter	string	查询参数
+
+4.6.9.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	employee_id	string	维保人员ID
+	name	string	维保人员名称
+	phone	string	维保人员手机号码
+	mail	string	维保人员邮箱
+4.6.10、获取设备维保人员列表
+4.6.10.1 请求方向
+Web --> Service
+4.6.10.2 请求方式
+GET
+api/devices/me/employee/list?offset=?&limit=?
+4.6.10.3 请求内容
+无
+4.6.10.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	device_me_id	string	设备维保人员ID
+	device_type	string	设备类型
+	employee_id	string	维保人员ID
+	name	string	维保人员名称
+	phone	string	维保人员手机号码
+	mail	string	维保人员邮箱
+	action	int	告警动作
+0x00 -发送短信
+0x01 -发送邮件
+4.6.11、新增设备维保人员
+4.6.11.1 请求方向
+Web --> Service
+4.6.11.2 请求方式
+POST
+api/devices/me/employee/add
+4.6.11.3 请求内容
+字段	类型	含义
+data	{}	
+	device_type	string	设备类型
+	employee_id	string	维保人员ID
+	action	int	告警动作
+0x00 -发送短信
+0x01 -发送邮件
+
+4.6.11.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	device_me_id	string	设备维保人员ID
+4.6.12、删除设备维保人员
+4.6.12.1 请求方向
+Web --> Service
+4.6.12.2 请求方式
+DELETE
+api/devices/me/employee/delete/{device_me_id}
+4.6.12.3 请求内容
+
+4.6.12.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.6.13、根据设备类型获取设备维保人员列表
+4.6.13.1 请求方向
+Web --> Service
+4.6.13.2 请求方式
+GET
+api/devices/me/employee/type/list?device_type=?&offset=?&limit=?
+4.6.13.3 请求内容
+无
+4.6.13.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	device_me_id	string	设备维保人员ID
+	device_type	string	设备类型
+	employee_id	string	维保人员ID
+	name	string	维保人员名称
+	phone	string	维保人员手机号码
+	mail	string	维保人员邮箱
+	action	int	告警动作
+0x00 -发送短信
+0x01 -发送邮件
+			
+4.6.14、给维保人员发送维保提醒（未实现）
+4.6.14.1 请求方向
+Web/APP --> Service
+4.6.14.2 请求方式
+POST
+api/devices/me/employee/send
+4.6.14.3 请求内容
+字段	类型	含义
+data	[]	
+	serial	string	物联网终端唯一识别码
+	employee_id	string	维保人员ID
+			
+
+4.6.14.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.6.15、维保单位详情
+4.6.15.1 请求方向
+Web --> Service
+4.6.15.2 请求方式
+GET
+api/devices/mtc/detail/{mtc_id}
+4.6.15.3 请求内容
+无
+4.6.15.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	name	string	维保单位名称
+	location	string	维保单位地址
+
+4.7．告警模块
+4.7.1、获取告警规则列表
+4.7.1.1 请求方向
+Web --> Service
+4.7.1.2 请求方式
+GET
+api/devices/alarm/rules/list?offset=?&limit=?
+4.7.1.3 请求内容
+无
+4.7.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	rule_id	string	规则ID
+	device_type	string	设备类型
+	min	double	最小值
+	max	double	最大值
+	action	int	告警动作
+0x00 -推送通知
+0x01 -发送短信
+0x02 -发送邮件
+	always	int	是否一直发送
+0-否
+1-是
+	sms_id	string	短信ID 
+当action为0x01时，指定
+	resend_duration	int	重发周期，单位秒，默认30
+	resendCount	omt	重发次数，缺省为0
+4.7.2、新增告警规则
+4.7.2.1 请求方向
+Web --> Service
+4.7.2.2 请求方式
+POST
+api/devices/alarm/rules/add
+4.7.2.3 请求内容
+字段	类型	含义
+data	{}	
+	device_type	string	设备类型
+	min	double	最小值
+	max	double	最大值
+	action	int	告警动作
+0x00 -推送通知
+0x01 -发送短信
+0x02 -发送邮件
+	always	int	是否一直发送
+0-否
+1-是
+	sms_id	string	短信ID 
+当action为0x01时，指定
+	resend_duration	int	重发周期，单位秒，默认30
+	resendCount	omt	重发次数，缺省为3
+
+4.7.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	rule_id	string	返回的ID
+4.7.3、修改告警规则
+4.7.3.1 请求方向
+Web --> Service
+4.7.3.2 请求方式
+PUT
+api/devices/alarm/rules/update/{rule_id}
+4.7.3.3 请求内容
+字段	类型	含义
+data	{}	
+	device_type	string	设备类型
+	min	double	最小值
+	max	double	最大值
+	action	int	告警动作
+0x00 -推送通知
+0x01 -发送短信
+0x02 -发送邮件
+	always	int	是否一直发送
+0-否
+1-是
+	sms_id	string	短信ID 
+当action为0x01时，指定
+	resend_duration	int	重发周期，单位秒，默认30
+	resendCount	omt	重发次数，缺省为3
+
+4.7.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.7.4、删除告警规则
+4.7.4.1 请求方向
+Web --> Service
+4.7.4.2 请求方式
+DELETE
+api/devices/alarm/rules/delete/{rule_id}
+4.7.4.3 请求内容
+无
+4.7.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.7.5、获取告警历史列表
+4.7.5.1 请求方向
+Web --> Service
+4.7.5.2 请求方式
+GET
+api/devices/alarm/logs/list?offset=?&limit=?
+4.7.5.3 请求内容
+无
+4.7.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	log_id	string	日志ID
+	tenant_id	string	租户ID
+	device_type	string	设备类型
+	serial	string	物联网终端唯一识别码
+	attime	string	告警时间
+	content	string	告警内容
+	status	int	处理状态：
+0-未确认
+1-已确认
+2-已复归
+6-  屏蔽
+7-  封锁
+	remark	string	处理备注
+4.7.6、查询告警历史列表
+4.7.6.1 请求方向
+Web --> Service
+4.7.6.2 请求方式
+POST
+api/devices/alarm/logs/search?offset=?&limit=?
+4.7.6.3 请求内容
+字段	类型	含义
+data	{}	
+	serial	string	物联网终端唯一识别码，必带
+	begin_time	string	开始时间，可选
+	end_time	string	结束时间，可选
+	content	string	告警内容，可选
+	status	int	处理状态：，可选
+0-未确认
+1-已确认
+2-已复归
+6-屏蔽
+7-封锁
+			
+
+4.7.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	log_id	string	日志ID
+	tenant_id	string	租户ID
+	device_type	string	设备类型
+	serial	string	物联网终端唯一识别码
+	attime	string	告警时间
+	content	string	告警内容
+	status	int	处理状态：
+0-未确认
+1-已确认
+2-已复归
+6-屏蔽
+7-封锁
+	remark	string	处理备注
+
+4.8．型号模块
+4.8.1、获取型号列表
+4.8.1.1 请求方向
+Web --> Service
+4.8.1.2 请求方式
+GET
+api/devices/model/list/{mf_id}?offset=?&limit=?
+4.8.1.3 请求内容
+无
+4.8.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	model_id	string	返回的ID
+	name	string	型号名称
+	description	string	型号描述
+4.8.2、新增型号
+4.8.2.1 请求方向
+Web --> Service
+4.8.2.2 请求方式
+POST
+api/devices/model/add
+4.8.2.3 请求内容
+字段	类型	含义
+data	{}	
+	mf_id	string	制造商ID
+	name	string	型号名称
+	description	string	型号描述
+
+4.8.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	model_id	string	返回的ID
+4.8.3、修改型号
+4.8.3.1 请求方向
+Web --> Service
+4.8.3.2 请求方式
+PUT
+api/devices/model/update/{model_id}
+4.8.3.3 请求内容
+字段	类型	含义
+data	{}	
+	mf_id	string	制造商ID
+	name	string	型号名称
+	description	string	型号描述
+
+4.8.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.8.4、删除型号
+4.8.4.1 请求方向
+Web --> Service
+4.8.4.2 请求方式
+DELETE
+api/devices/model/delete/{model_id}
+4.8.4.3 请求内容
+无
+4.8.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.8.5、型号详情
+4.8.5.1 请求方向
+Web --> Service
+4.8.5.2 请求方式
+GET
+api/devices/model/detail/{model_id}
+4.8.5.3 请求内容
+无
+4.8.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	mf_id	string	制造商ID
+	name	string	型号名称
+	description	string	型号描述
+
+4.9. 租户设备类型
+以下请求为操作hp_tenants_devices_collections表
+4.9.1、获取租户设备类型列表
+4.9.1.1 请求方向
+Web --> Service
+4.9.1.2 请求方式
+GET
+api/devices/tenant/collection/list?offset=?&limit=?
+4.9.1.3 请求内容
+无
+4.9.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	collect_id	string	返回的ID
+	device_type	string	设备类型
+	name	string	设备名称
+4.9.2、新增租户设备类型
+4.9.2.1 请求方向
+Web --> Service
+4.9.2.2 请求方式
+POST
+api/devices/tenant/collection/add
+4.9.2.3 请求内容
+字段	类型	含义
+data	{}	
+	device_type	string	设备类型
+	name	string	设备名称
+
+4.9.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	collect_id	string	返回的图片URL
+4.9.3、删除租户设备类型
+4.9.3.1 请求方向
+Web --> Service
+4.9.3.2 请求方式
+DELETE
+api/devices/tenant/collection/delete/{collect_id}
+4.9.3.3 请求内容
+无
+4.9.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.10. 告警上报与处理
+4.10.1．告警上报
+4.10.1.1 请求方向
+APP --> Service
+4.10.1.2 请求方式
+此处Header中不携带Access-Token
+POST
+api/devices/alarm/report
+4.10.1.3 请求内容
+字段	类型	含义
+data	{}	
+	device_type	string	设备类型，可选
+	serial	string	物联网终端唯一识别码
+	status	int	处理状态：
+0-未确认
+1-已确认
+2-已复归
+3-故障
+5-掉线
+6-屏蔽
+7-封锁
+99-正常
+	tenant_id	string	租户ID
+	except_type	int	异常类型
+0：数据异常
+1：设备异常
+	except_level	int	异常级别
+1：危急
+2：严重
+3：一般
+4: 告知
+	raw	string	告警的原始数据
+	except_reason	string	告警的原因
+	rule_type	int	告警触发的规则类型
+0-无
+1-规则配置
+2-Hub规则
+	rule_id	string	规则触发的ID
+	attime	int	告警时间,s
+
+4.10.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	alarm_id	string	告警ID
+4.10.1.5 处理方式
+如果同一个传感器一直报告警，在告警未消除前，则在hp_devices_alarm中只对应一条数据。
+
+
+
+4.10.2．告警处理
+4.10.2.1 请求方向
+APP --> Service
+4.10.2.2 请求方式
+需要在Header中携带Access-Token
+POST
+api/devices/alarm/process
+4.10.2.3 请求内容
+字段	类型	含义
+data	{}	
+	alarm_id	string	告警源
+	serial	string	物联网终端唯一识别码
+	status	int	处理状态：
+1-已确认
+2-已复归
+6-屏蔽
+7-封锁
+	remark	string	告警处理备注
+
+4.10.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.10.2.5 处理过程
+（1）、根据处理请求更新hp_devices_alarm表的status字段
+（2）、写入hp_devices_alarm_process表
+
+4.10.3．告警解除
+4.10.3.1 请求方向
+APP --> Service
+4.10.3.2 请求方式
+此处Header中不携带Access-Token
+POST
+api/devices/alarm/relieve
+4.10.3.3 请求内容
+字段	类型	含义
+data	{}	
+	alarm_id	[]string	告警ID，可选
+	device_type	string	设备类型，可选
+	serial	string	物联网终端唯一识别码
+	tenant_id	string	租户ID
+	reason	int	告警解除原因
+0-离线修改为在线
+1-设备本身上报
+	attime	int	解除时间
+
+4.10.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.10.3.5 处理过程
+如果alarm_id存在，则将对应的告警设置为 已复归
+4.10.4．告警批量处理
+4.10.4.1 请求方向
+APP --> Service
+4.10.4.2 请求方式
+需要在Header中携带Access-Token
+POST
+api/devices/alarm/process/batch
+4.10.4.3 请求内容
+字段	类型	含义
+data	{}	
+	alarms	[]	告警源列表
+		alarm_id	string	告警源
+	status	int	处理状态：
+1-已确认
+2-已复归
+	remark	string	告警处理备注
+
+4.10.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.11. 第三方接口
+4.11.1．设备授权
+4.11.1.1 请求方向
+Web --> Service
+4.11.1.2 请求方式
+POST
+api/devices/authorize
+注意：此接口不带Access-Token
+4.11.1.3 请求内容
+字段	类型	含义
+data	{}	
+	serial	string	设备序列号
+			
+
+4.11.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	device_id	string	设备ID
+	device_meta_id	string	Profile元数据ID
+	access_token	string	设备的token
+	device_type	string	设备类型
+	tenant_id	string	租户ID
+4.11.1.5 处理过程
+此时设置hp_devices_status的首次接入时间first_access
+4.11.2．获取网关设备关系
+4.11.2.1 请求方向
+Hub --> Platform
+4.11.2.2 请求方式
+GET
+api/devices/hub/topology/{serial}/list?offset=?&limit=?
+此接口不考虑offset、limit参数
+4.11.2.3 请求内容
+无
+4.11.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误消息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	base_ip	string	基站IP，对于网关直属设备，返回空
+	base_eui	string	基站的EUI标识，对于网关直属设备，返回空
+	devices	[]	基站关联的设备列表
+		base_dev_addr	string	基站对于每设备配置的设备ID，对于网关直属设备，返回空
+		dev_id	string	设备ID
+		device_type	string	设备类型，参考4.4
+		serial	string	设备序列号
+		secret_key	string	加解密密钥，
+Lora对于每设备配置的加解密秘钥
+			
+注意：返回网关下挂的基站及其设备、以及网关下卦的设备列表
+4.11.2.5 处理过程
+（1）、根据入参serial查询hp_devices中device_type=0的设备记录，得到dev_id
+（2）、再根据gateway_id、device_class=1查询hp_egde_gateway_device得到基站的source_id
+（3）、根据source_id查询hp_base_station、hp_base_station_device得到基站信息、以及基站关联的设备信息
+4.12、拓扑
+4.12.1．获取拓扑列表
+4.12.1.1 请求方向
+Web --> Service
+4.12.1.2 请求方式
+GET
+api/devices/topology/list
+4.12.1.3 请求内容
+无
+4.12.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	topo_id	string	拓扑ID
+	parent_topo_id	string	父拓扑ID
+	name	string	拓扑名称
+	longitude	float	经度
+	latitude	float	纬度
+	sketch	string	示意图URL
+	location	string	拓扑位置
+	topo_department_name	string	拓扑部门名称
+	topo_category_name	string	拓扑类别名称
+	topo_category_id	string	拓扑类别ID
+	topo_category_primary	int	拓扑类别类型，是否为主要类别
+
+4.12.2．新增拓扑
+4.12.2.1 请求方向
+Web --> Service
+4.12.2.2 请求方式
+POST
+api/devices/topology/add
+4.12.2.3 请求内容
+字段	类型	含义
+data	{}	
+	parent_topo_id	string	父拓扑ID，如果未携带，表示根节点
+	topo_category_id	string	拓扑类别ID
+	name	string	拓扑名称
+	longitude	float	经度
+	latitude	float	纬度
+	sketch	string	示意图URL
+	location	string	拓扑位置
+
+4.12.2.4 请求响应
+字段	类型	含义
+data	{}	
+	topo_id	string	拓扑ID
+
+4.12.3．修改拓扑
+4.12.3.1 请求方向
+Web --> Service
+4.12.3.2 请求方式
+PUT
+api/devices/topology/update/{topo_id}
+4.12.3.3 请求内容
+字段	类型	含义
+data	{}	
+	topo_category_id	string	拓扑类别ID
+	name	string	拓扑名称
+	longitude	float	经度
+	latitude	float	纬度
+	sketch	string	示意图URL
+	location	string	拓扑位置
+
+4.12.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.12.4．删除拓扑
+4.12.4.1 请求方向
+Web --> Service
+4.12.4.2 请求方式
+DELETE
+api/devices/topology/delete/{topo_id}
+4.12.4.3 请求内容
+无
+4.12.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.12.5．拓扑详情
+4.12.5.1 请求方向
+Web --> Service
+4.12.5.2 请求方式
+GET
+api/devices/topology/detail/{topo_id}
+4.12.5.3 请求内容
+无
+4.12.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	topo_id	string	拓扑ID
+	parent_topo_id	string	父拓扑ID
+	parent_topo_name	string	父拓扑名称
+	topo_category_name	string	拓扑类别名称
+	name	string	拓扑名称
+	longitude	float	经度
+	latitude	float	纬度
+	location	string	拓扑位置
+	topo_department_name	string	拓扑部门名称
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+4.12.6．根据设备serial查询拓扑路径
+4.12.6.1 请求方向
+web --> Service
+4.12.6.2 请求方式
+需要在Header中携带Access-Token
+GET
+api/devices/topology/path/{serial}
+4.12.6.3 请求内容
+无
+4.12.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	topo_id	string	按照设备序列号所属的拓扑层次返回topo_id结构
+4.12.6.5 处理过程
+根据serial,tenant_id查询hp_devices_topology_belongs表获取拓扑id列表
+4.12.7．整理拓扑层次（接口工具）
+4.12.7.1 请求方向
+web --> Service
+4.12.7.2 请求方式
+需要在Header中携带Access-Token
+POST
+api/devices/topology-hierarchy/reset
+4.12.7.3 请求内容
+无
+4.12.7.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.12.7.5 处理过程
+（1）、将hp_devices_topology_hierarchy表清空
+（2）、根据hp_devices_topology数据重新生成hp_devices_topology_hierarchy表
+4.12.8、查看子拓扑
+4.12.8.1 请求方向
+Web/APP --> Service
+4.12.8.2 请求方式
+GET
+api/devices/topology/sub/{topo_id}
+4.12.8.3 请求内容
+无
+4.12.8.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	name	string	拓扑名称
+	topo_id	string	拓扑ID
+
+4.13、拓扑负责人
+4.13.1．查看拓扑负责人
+
+4.13.1.1 请求方向
+Web/APP --> Service
+4.13.1.2 请求方式
+GET
+api/devices/topology/head/list?topo_id=?&offset=?&limit=?
+4.13.1.3 请求内容
+无
+4.13.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	head_id	string	负责人ID
+	dep_id	string	部门ID
+	dep_name	string	部门名称
+
+4.13.2．新增拓扑负责人
+4.13.2.1 请求方向
+Web/APP --> Service
+4.13.2.2 请求方式
+POST
+api/devices/topology/head/add/{topo_id}
+4.13.2.3 请求内容
+字段	类型	含义
+data	{}	
+	dep_id	string	部门ID
+
+4.13.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	head_id	string	负责人ID
+
+4.13.3．修改拓扑负责人
+4.13.3.1 请求方向
+Web/APP --> Service
+4.13.3.2 请求方式
+PUT
+api/devices/topology/head/update/{head_id}
+4.13.3.3 请求内容
+字段	类型	含义
+data	{}	
+	dep_id	string	部门ID
+
+4.13.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.13.4．删除拓扑负责人
+4.13.4.1 请求方向
+Web/APP --> Service
+4.13.4.2 请求方式
+DELETE
+api/devices/topology/head/delete/{head_id}
+4.13.4.3 请求内容
+无
+4.13.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.14、拓扑类别
+4.14.1 获取拓扑类别列表
+4.14.1.1 请求方向
+Web --> Service
+4.14.1.2 请求方式
+GET
+api/devices/topology-category/list
+4.14.1.3 请求内容
+无
+4.14.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	topo_category_id	string	拓扑类别ID
+	name	string	拓扑类别名称
+	primary	int	是否为主要类别
+4.14.2 新增拓扑类别
+4.14.2.1 请求方向
+Web --> Service
+4.14.2.2 请求方式
+POST
+api/devices/topology-category/add
+4.14.2.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	拓扑类别名称
+	primary	int	是否为主要类别
+0-否
+1-是
+	device_type	[]string	设备类型，可选，当primary为0时携带
+	sub_category_id	[]string	子拓扑类别，可选，当primay为1时携带
+
+4.14.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	topo_category_id	string	拓扑类别ID
+4.14.2.5 处理过程
+当primary=0时，将设备类型全量添加到hp_devices_topology_device_type
+当primary=1时，将子拓扑类别添加到hp_devices_topology_relations
+4.14.3 修改拓扑类别
+4.14.3.1 请求方向
+Web --> Service
+4.14.3.2 请求方式
+PUT
+api/devices/topology-category/update/{topo_category_id}
+4.14.3.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	拓扑类别名称
+	primary	int	是否为主要类别
+0-否
+1-是
+	device_type	[]string	设备类型，可选，当primary为0时携带
+	sub_category_id	[]string	子拓扑类别，可选，当primay为1时携带
+
+4.14.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.14.3.5 处理过程
+当primary=0时，将设备类型全量添加到hp_devices_topology_category
+4.14.4 删除拓扑类别
+4.14.4.1 请求方向
+Web --> Service
+4.14.4.2 请求方式
+DELETE
+api/devices/topology-category/delete/{topo_category_id}
+4.14.4.3 请求内容
+无
+4.14.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.14.5 根据拓扑类别获取设备类型
+4.14.5.1 请求方向
+Web --> Service
+4.14.5.2 请求方式
+POST
+api/devices/topology-category/device-type/list?limit=?&offset=?
+4.14.5.3 请求内容
+data	[]	
+	category_id	string	拓扑类别ID
+
+4.14.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total	int	总数
+total_page	int	总页面数
+data	[]	
+	device_type	string	设备类型
+	name	string	设备类型名称
+4.14.6 根据类别获取拓扑类别列表
+4.14.6.1 请求方向
+Web --> Service
+4.14.6.2 请求方式
+GET
+api/devices/topology-category/list/primary
+4.14.6.3 请求内容
+字段	类型	含义
+data	{}	
+	primary	int	是否为主要类别
+0:否
+1:是
+
+4.14.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	
+	topo_category_id	string	拓扑类别ID
+	name	string	拓扑类别名称
+4.14.7 获取拓扑类别详情
+4.14.7.1 请求方向
+Web --> Service
+4.14.7.2 请求方式
+GET
+api/devices/topology-category/detail/{topo_category_id}
+4.14.7.3 请求内容
+无
+4.14.7.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	topo_category_id	string	拓扑类别ID
+	name	string	拓扑类别名称
+	primary	int	是否为主要类别
+	device_type	[]string	设备类型，可选，当primary为0时携带
+	category_id	[]string	子拓扑类型，当primary=1时携带
+4.14.8 根据拓扑类别获取子拓扑类别
+4.14.8.1 请求方向
+Web --> Service
+4.14.8.2 请求方式
+POST
+api/devices/topology-category/sub/list?limit=?&offset=?hub/topology
+
+4.14.8.3 请求内容
+data	[]	
+	category_id	string	拓扑类别ID
+
+4.14.8.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total	int	总数
+total_page	int	总页面数
+data	[]	
+	category_id	string	子拓扑类别ID
+	name	string	子拓扑类别名称
+
+4.15．基站管理
+4.15.1、获取基站列表
+4.15.1.1 请求方向
+Web --> Service
+4.15.1.2 请求方式
+GET
+api/devices/base-station/list?offset=?&limit=?
+4.15.1.3 请求内容
+无
+4.15.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	base_id	string	基站ID
+	name	string	基站名称
+	ip	string	基站IP
+	eui	string	基站EUI标识
+
+4.15.2、新增基站
+4.15.2.1 请求方向
+Web --> Service
+4.15.2.2 请求方式
+POST	
+api/devices/base-station/add
+4.15.2.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	基站名称
+	ip	string	基站IP
+	eui	string	基站EUI标识
+	topo_id	string	拓扑ID
+
+4.15.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	base_id	string	基站ID
+4.15.2.5 处理过程
+（1）、校验ip、eui唯一性
+（2）、根据hp_base_station_topo校验topo_id下是否已经绑定了基站，如果已经绑定；则返回错误
+（3）、添加hp_base_station记录
+（4）、添加hp_base_station_topo记录
+4.15.3、修改基站
+4.15.3.1 请求方向
+Web --> Service
+4.15.3.2 请求方式
+POST	
+api/devices/base-station/update/{base_id}
+4.15.3.3 请求内容
+字段	类型	含义
+data	{}	
+	name	string	基站名称
+	ip	string	基站IP
+	eui	string	基站EUI标识
+
+4.15.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.15.4、删除基站
+4.15.4.1 请求方向
+Web --> Service
+4.15.4.2 请求方式
+DELETE	
+api/devices/base-station/delete/{base_id}
+4.15.4.3 请求内容
+无
+4.15.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.15.5、新增基站拓扑
+4.15.5.1 请求方向
+Web --> Service
+4.15.5.2 请求方式
+POST
+api/devices/base-station/add/topo
+4.15.5.3 请求内容
+字段	类型	含义
+data	{}	
+	base_id	string	基站ID
+	topo_id	string	拓扑ID
+
+4.15.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	base_topo_id	string	基站拓扑ID
+4.15.6、删除基站拓扑
+4.15.6.1 请求方向
+Web --> Service
+4.15.6.2 请求方式
+DELETE
+api/devices/base-station/delete/topo/{base_topo_id}
+4.15.6.3 请求内容
+无
+4.15.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.15.7、新增基站设备
+4.15.7.1 请求方向
+Web --> Service
+4.15.7.2 请求方式
+POST
+api/devices/base-station/add/device
+4.15.7.3 请求内容
+字段	类型	含义
+data	{}	
+	base_id	string	基站ID
+	base_dev_addr	string	基站对于每设备配置的设备ID
+	dev_id	string	设备ID
+	secret_key	string	加解密密钥，
+Lora对于每设备配置的加解密秘钥
+
+4.15.7.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	base_device_id	string	基站设备ID
+
+4.15.8、修改基站设备
+4.15.8.1 请求方向
+Web --> Service
+4.15.8.2 请求方式
+POST	
+api/devices/base-station/update/device/{base_device_id}
+4.15.8.3 请求内容
+字段	类型	含义
+data	{}	
+	base_dev_addr	string	基站对于每设备配置的设备ID
+	secret_key	string	加解密密钥，
+Lora对于每设备配置的加解密秘钥
+
+4.15.8.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.15.9、删除基站设备
+4.15.9.1 请求方向
+Web --> Service
+4.15.9.2 请求方式
+DELETE
+api/devices/base-station/delete/device/{base_device_id}
+4.15.9.3 请求内容
+无
+4.15.9.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.15.10、获取基站拓扑列表
+4.15.10.1 请求方向
+Web --> Service
+4.15.10.2 请求方式
+GET
+api/devices/base-station/topo/list/{base_id}?offset=?&limit=?
+4.15.10.3 请求内容
+无
+4.15.10.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	base_topo_id		基站拓扑ID
+	topo_id	string	拓扑ID
+	topo_name	string	拓扑名称
+	longitude	float	拓扑经度
+	latitude	float	拓扑纬度
+
+4.15.11、获取基站设备列表
+4.15.11.1 请求方向
+Web --> Service
+4.15.11.2 请求方式
+GET
+api/devices/base-station/device/list/{base_id}?offset=?&limit=?
+4.15.11.3 请求内容
+无
+4.15.11.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	base_device_id	String	基站设备ID
+	base_dev_addr	string	基站对于每设备配置的设备ID
+	dev_id	string	设备ID
+	secret_key	string	加解密密钥，
+Lora对于每设备配置的加解密秘钥
+	longitude	float	设备经度
+	latitude	float	设备纬度
+	serial	string	设备序列号
+	collection_name	string	设备类型名称
+4.15.12、查询基站
+4.15.12.1 请求方向
+Web --> Service
+4.15.12.2 请求方式
+POST
+api/devices/base-station/search?offset=?&limit=?
+4.15.12.3 请求内容
+字段	类型	含义
+data	{}	
+	ip	string	基站IP
+	eui	string	基站EUI标识
+备注：IP和EUI参数，必带一个
+4.15.12.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	base_id	string	基站ID
+	name	string	基站名称
+	ip	string	基站IP
+	eui	string	基站EUI标识
+	topo_primary_name	string	安装站点
+
+4.15.13、根据拓扑获取基站列表
+4.15.13.1 请求方向
+Web --> Service
+4.15.13.2 请求方式
+GET
+api/devices/base-station/list/{topo_id}?offset=?&limit=?
+4.15.13.3 请求内容
+无
+4.15.13.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	base_id	string	基站ID
+	name	string	基站名称
+	ip	string	基站IP
+	eui	string	基站EUI标识
+	topo_primary_name	string	安装站点
+
+4.16．网关管理
+4.16.1、新增网关拓扑
+4.16.1.1 请求方向
+Web --> Service
+4.16.1.2 请求方式
+POST
+api/devices/gateway/add/topo
+4.16.1.3 请求内容
+字段	类型	含义
+data	{}	
+	gateway_id	string	网关ID
+	topo_id	string	拓扑ID
+
+4.16.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	gateway_topo_id	string	网关拓扑ID
+4.16.2、删除网关拓扑
+4.16.2.1 请求方向
+Web --> Service
+4.16.2.2 请求方式
+DELETE
+api/devices/gateway/delete/topo/{gateway_topo_id}
+4.16.2.3 请求内容
+无
+4.16.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+
+4.16.3、新增网关设备
+4.16.3.1 请求方向
+Web --> Service
+4.16.3.2 请求方式
+POST	
+api/devices/gateway/add/device
+4.16.3.3 请求内容
+字段	类型	含义
+data	{}	
+	gateway_id	string	网关ID
+	device_class	int	设备类型
+0-设备
+1-基站
+	source_id	string	源ID
+当设备类型为0时，表示dev_id
+当设备类型为1时，表示base_id
+
+4.16.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	gateway_device_id	string	网关设备ID
+
+4.16.4、删除网关设备
+4.16.4.1 请求方向
+Web --> Service
+4.16.4.2 请求方式
+DELETE
+api/devices/gateway/delete/device/{gateway_device_id}
+4.16.4.3 请求内容
+无
+4.16.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.16.5、获取网关拓扑列表
+4.16.5.1 请求方向
+Web --> Service
+4.16.5.2 请求方式
+GET
+api/devices/gateway/topo/list/{gateway_id}?offset=?&limit=?
+4.16.5.3 请求内容
+无
+4.16.5.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	gateway_topo_id	string	网关拓扑ID
+	topo_id	string	拓扑ID
+	topo_name	string	拓扑名称
+	longitude	float	拓扑经度
+	latitude	float	拓扑纬度
+
+4.16.6、获取网关设备列表
+4.16.6.1 请求方向
+Web --> Service
+4.16.6.2 请求方式
+GET
+api/devices/gateway/device/list/{gateway_id}?offset=?&limit=?
+4.16.6.3 请求内容
+无
+4.16.6.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	gateway_device_id	String	网关设备ID
+	device_class	int	设备类型
+0-设备
+1-基站
+	source_id	string	源ID
+当设备类型为0时，表示dev_id
+当设备类型为1时，表示base_id
+	serial	string	设备序列号
+	name	string	对于基站，返回基站名称
+对于设备，返回设备别名
+4.16.7、获取拓扑及其下所有的网关列表
+4.16.7.1 请求方向
+Web --> Service
+4.16.7.2 请求方式
+GET
+api/devices/gateway/topology/under/list?topo=?&offset=?&limit=?
+4.16.7.3 请求内容
+无
+4.16.7.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+4.16.8、新增网关
+4.16.8.1 请求方向
+Web --> Service
+4.16.8.2 请求方式
+POST
+api/devices/gateway/add
+4.16.8.3 请求内容
+字段	类型	含义
+data	{}	
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	building	string	幢数，可选
+	floor	string	层，可选
+	room	string	房间，可选
+	topo_id	string	拓扑ID，可选
+	secret_key	string	加解密密钥，可选
+	longitude	float	经度
+	latitude	float	纬度
+	mf_id	string	制造商ID
+	model_id	string	型号ID
+	mtc_id	string	维保单位ID
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+
+4.16.8.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	dev_id	string	设备ID
+4.16.8.4 处理逻辑
+写入hp_devices表，hp_edge_gateway_topo表
+4.16.9、修改网关
+4.16.9.1 请求方向
+Web --> Service
+4.16.9..2 请求方式
+PUT
+api/devices/gateway/update/{device_id}
+4.16.9.3 请求内容
+字段	类型	含义
+data	{}	
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	building	string	幢数，可选
+	floor	string	层，可选
+	room	string	房间，可选
+	topo_id	string	拓扑ID，可选
+	secret_key	string	加解密密钥
+	longitude	float	经度
+	latitude	float	纬度
+	mf_id	string	制造商ID
+	model_id	string	型号ID
+	mtc_id	string	维保单位ID
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+
+4.16.9.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data		
+	dev_id	string	设备ID
+
+4.16.10、删除网关
+4.16.10.1 请求方向
+Web --> Service
+4.16.10.2 请求方式
+DELETE
+api/devices/gateway/delete/{dev_id}
+4.16.10.3 请求内容
+
+4.16.10.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.16.11、批量导入网关
+4.16.11.1 请求方向
+Web --> Service
+4.16.11.2 请求方式
+POST
+api/devices/gateway/add/batch/{topo_id}
+4.16.11.3 请求内容
+字段	类型	含义
+data	[]	
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支名称
+	building	string	幢数，可选
+	floor	string	层，可选
+	room	string	房间，可选
+	secret_key	string	加解密密钥，可选
+	longitude	float	经度
+	latitude	float	纬度
+	mf_id	string	制造商ID
+	model_id	string	型号ID
+	mtc_id	string	维保单位ID
+
+4.16.11.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.16.12、网关导出
+4.16.12.1 请求方向
+Web --> Service
+4.16.12.2 请求方式
+POST
+api/devices/gateway/export
+4.16.12.3 请求内容
+字段	类型	含义
+data	{}	
+	all	int	是否导出全部
+0-否
+1-是
+	serials	[]	导出的设备序列号
+		serial	string	物联网终端唯一识别码
+
+4.16.12.4 请求响应
+返回excel格式
+excel格式如下：
+设备ID	物联网终端唯一识别码	设备类型	设备别名	分支名称	设备安装图片URL	制造商名称	型号名称	维保单位名称
+					多个以,分隔			
+								
+4.17．绑定设备
+4.17.1、绑定设备
+4.17.1.1 请求方向
+Web --> Service
+4.17.1.2 请求方式
+POST
+api/devices/bind
+4.17.1.3 请求内容
+携带Access-Token
+字段	类型	含义
+data	{}	
+	dev_id	string	设备ID
+	serial	string	设备序列号
+
+4.17.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+4.17.2、我的绑定设备
+4.17.2.1 请求方向
+Web --> Service
+4.17.2.2 请求方式
+GET
+api/devices/bind/mine/list?offset=?&limit=?
+4.17.2.3 请求内容
+携带Access-Token
+4.17.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	topology	string	设备的拓扑
+	topo_id	string	拓扑ID
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+	location	string	安装位置
+	observer	string	监测对象
+4.17.3、根据类型查看我的绑定设备
+4.17.3.1 请求方向
+Web --> Service
+4.17.3.2 请求方式
+GET
+api/devices/bind/mine/type/list??type=?&offset=?&limit=?
+4.17.3.3 请求内容
+携带Access-Token
+4.17.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	dev_id	string	设备ID
+	serial	string	物联网终端唯一识别码
+	alias	string	设备别名
+	device_type	string	设备类型
+	branch_id	string	分支ID
+	branch_name	string	分支名称
+	building	string	幢数
+	floor	string	层
+	room	string	房间
+	topology	string	设备的拓扑
+	topo_id	string	拓扑ID
+	secret_key	string	加解密密钥
+	sketchs	[]	设备安装图片URL
+		url	string	图片URL地址
+	mf_name	string	制造商名称
+	model_name	string	型号名称
+	mtc_name	string	维保单位名称
+	location	string	安装位置
+	observer	string	监测对象
+4.18．统计
+4.18.1、设备统计
+4.18.1.1 请求方向
+Web --> Service
+4.18.1.2 请求方式
+POST
+api/v1/device/statistic/overall
+4.18.1.3 请求内容
+携带Access-Token
+字段	类型	含义
+query_type	int	查询方式
+0-根据branch_id
+branch_id	string	分支ID
+
+4.18.1.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	返回数据
+	total	int	设备总数
+	stats	[]	按状态统计
+		status	int	设备状态
+0-未确认
+1-已确认
+2-已复归
+3-故障
+
+5-掉线
+6-屏蔽
+7-封锁
+8-运行中
+9-空闲
+99-正常
+		total	int	设备计数
+4.18.1.5 处理过程
+query_type=0
+需要携带branch_id参数。
+根据branch_id查询hp_devices得到device列表
+根据device列表查询hp_devices_status得到各状态统计量
+4.18.2、告警统计
+4.18.2.1 请求方向
+Web --> Service
+4.18.2.2 请求方式
+POST
+api/v1/device/statistic/alarm/overall
+4.18.2.3 请求内容
+携带Access-Token
+字段	类型	含义
+query_type	int	查询方式
+0-根据branch_id
+branch_id	string	分支ID
+
+4.18.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	[]	返回数据
+	except_level	int	异常级别
+1：危急
+2：严重
+3：一般
+4：告知
+	total	int	异常级别计数
+4.18.2.5 处理过程
+query_type=0
+需要携带branch_id参数。
+根据branch_id查询hp_devices得到device列表
+根据device列表查询hp_devices_alarm得到各级别统计量
+4.18.3、告警级别统计
+4.18.3.1 请求方向
+Web --> Service
+4.18.3.2 请求方式
+POST
+api/v1/device/statistic/alarm/level/overall
+4.18.3.3 请求内容
+携带Access-Token
+字段	类型	含义
+query_type	int	查询方式
+0-根据branch_id
+branch_id	string	分支ID
+except_level	int	异常级别
+1：危急
+2：严重
+3：一般
+4：告知
+
+4.18.3.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	返回数据
+	total	int	全部告警计数
+	processed_total	int	已处理的告警计数
+	processing_total	int	处理中的告警计数
+	unprocessed_total	int	未处理的告警计数
+4.18.3.5 处理过程
+query_type=0
+需要携带branch_id参数。
+根据branch_id查询hp_devices得到device列表
+根据device列表查询hp_devices_alarm得到各级别统计量
+4.18.4、告警分类统计
+4.18.4.1 请求方向
+Web --> Service
+4.18.4.2 请求方式
+POST
+api/v1/device/statistic/alarm/category/overall
+4.18.4.3 请求内容
+携带Access-Token
+字段	类型	含义
+query_type	int	查询方式
+0-根据branch_id
+branch_id	string	分支ID
+
+4.18.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	返回数据
+	stats	[]	按设备类型统计
+		device_type	string	设备类型
+		total	int	设备计数
+4.18.4.5 处理过程
+query_type=0
+需要携带branch_id参数。
+根据branch_id查询hp_devices得到device列表，按照deviceType分组进行统计
+4.19．告警统计
+4.19.1．查询告警列表
+4.19.1.1 请求方向
+APP --> Service
+4.19.1.2 请求方式
+需要在Header中携带Access-Token
+POST
+api/v1/devices/alarm/list?offset=?&limit=?
+4.19.1.3 请求内容
+字段	类型	含义
+data	{}	
+	serial	string	物联网终端唯一识别码
+	status	[]int	处理状态：
+0-未处理
+1-处理中
+2-处理完成
+	time_start	int	查询开始时间
+	time_end	int	查询结束时间
+	device_type	string	设备类型
+	topo_category_id	string	设备拓扑类别ID
+	alarm_type	int	告警类型
+0-预警
+1-告警
+	except_level	int	异常级别
+1：1级
+2：2级
+3：3级
+			
+4.19.4.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+total_page	int	总页面数
+total	int	总记录数
+data	[]	
+	alarm_id	string	告警
+	device_type	string	设备类型
+	status	int	处理状态：
+0-告警已上报
+1-告警正在处理
+2-告警处理完成
+	alarm_type	int	告警类型
+0：预警
+1：告警
+	except_type	int	异常类型
+0：数据异常
+1：设备异常
+	except_level	int	异常级别
+1：1级
+2：2级
+3：3级
+	except_reason	string	告警的原因
+	attime	int	告警时间
+	serial	string	设备序列号
+	device_category_id	string	设备拓扑类别ID
+	device_category_name	string	设备拓扑类别名称
+	location	string	设备位置
+			
+4.19.2．查询告警详情
+4.19.2.1 请求方向
+APP --> Service
+4.19.2.2 请求方式
+需要在Header中携带Access-Token
+GET
+api/v1/devices/alarm/detail/{alarm_id}
+4.19.2.3 请求内容
+无
+4.19.2.4 请求响应
+字段	类型	含义
+code	int	错误码
+message	string	错误码信息
+data	{}	
+	alarm_id	string	告警源ID
+	device_type	string	设备类型
+	status	int	处理状态：
+0-告警已上报
+1-告警正在处理
+2-告警处理完成
+	alarm_type	int	告警类型
+0：预警
+1：告警
+	except_type	int	异常类型
+0：数据异常
+1：设备异常
+	except_level	int	异常级别
+1：1级
+2：2级
+3：3级
+	attime	int	告警时间
+	raw	string，JSON格式	告警的原始数据
+	location	string	设备位置
+	sketch	string	设备安装图
+	except_reason	string	告警的原因
+	serial	string	设备序列号
+	alias	string	设备别名
+
+5.处理过程
+5.1.告警过程
+5.2.告警处理
+5.3.维保过程
+6.错误码
+错误码	含义
+	
+	
+	
+	
+
+7.配置项
+
