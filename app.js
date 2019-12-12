@@ -46,6 +46,7 @@ router.get('/api/test', showTest)
   .get(`/usr/api/v1/yum-store/list`, a5)
   .get(`/dev/api/devices/branch/list`, a6)
   .get(`/dev/api/devices/category/list`, a7)
+  .post(`/dev/api/v1/device/statistic/alarm/level/overall`, a8)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -149,7 +150,7 @@ async function a4(ctx, next) {
         alias: 'alias',
         attime: '2019.2.3',
         alarm_type: 1,
-        except_level: 6,
+        except_level: 4,
         m_category: '厨房设备',
         except_reason: '告警的原因',
         status: 0,
@@ -294,6 +295,22 @@ async function a7(ctx, next) {
         s_category: '',
       }
     ]
+
+  }
+}
+
+async function a8(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: 'suc',
+    total_page: 1,
+    total: 2,
+    data: {
+      total: 10,
+      processed_total: 3,
+      processing_total: 4,
+      unprocessed_total: 3
+    }
 
   }
 }
