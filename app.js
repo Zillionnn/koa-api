@@ -53,6 +53,9 @@ router.get('/api/test', showTest)
   .post(`/core/api/v1/devicedata/list`, a12)
   .post(`/iot-broker/api/v1/iot/device/dashboard/query_device_day`, a14)
   .post(`/iot-broker/api/v1/iot/power/serial/hour/query_day`, a15)
+  // fryer haccp
+  // .post(`/iot-broker/api/v1/iot/device/dashboard/query_device_day`, a16)
+  .get(`/iot-broker/api/v1/iot/frier-press-btn/list`, a17)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -414,7 +417,174 @@ async function a14(ctx, next) {
 async function a15(ctx, next) {
   ctx.response.body = { "code": 0, "data": [{ "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "00:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "01:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "02:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "03:00", "total": 2.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "04:00", "total": 3.4, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "05:00", "total": 6.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "06:00", "total": 9.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "07:00", "total": 9.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "08:00", "total": 12.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "09:00", "total": 14.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "10:00", "total": 18.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "11:00", "total": 18.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "12:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "13:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "14:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "15:00", "total": 22.1, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "16:00", "total": 24.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "17:00", "total": 24.6, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "18:00", "total": 26.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "19:00", "total": 29.3, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "20:00", "total": 31.6, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "21:00", "total": 33.4, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "22:00", "total": 35, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "23:00", "total": 35, "create_time": "0001-01-01T00:00:00Z" }], "message": "success" }
 }
-app.use(router.routes());
-// listen
 
-if (!module.parent) app.listen(3000);
+async function a16(ctx, next) {
+  ctx.response.body = { "code": 0, "data": [{ "id": "6fd4c7c0757944289af8299ed308c341", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2157\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576317376760,\\\"endTime\\\":1576318217661,\\\"quantity\\\":4,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":335.0},{\\\"time\\\":9,\\\"tem\\\":332.0},{\\\"time\\\":14,\\\"tem\\\":330.0},{\\\"time\\\":19,\\\"tem\\\":328.0},{\\\"time\\\":27,\\\"tem\\\":326.0},{\\\"time\\\":62,\\\"tem\\\":324.0},{\\\"time\\\":95,\\\"tem\\\":321.0},{\\\"time\\\":122,\\\"tem\\\":319.0},{\\\"time\\\":146,\\\"tem\\\":317.0},{\\\"time\\\":168,\\\"tem\\\":315.0},{\\\"time\\\":192,\\\"tem\\\":313.0},{\\\"time\\\":217,\\\"tem\\\":311.0},{\\\"time\\\":240,\\\"tem\\\":309.0},{\\\"time\\\":269,\\\"tem\\\":307.0},{\\\"time\\\":302,\\\"tem\\\":305.0},{\\\"time\\\":336,\\\"tem\\\":302.0},{\\\"time\\\":369,\\\"tem\\\":300.0},{\\\"time\\\":403,\\\"tem\\\":298.0},{\\\"time\\\":438,\\\"tem\\\":296.0},{\\\"time\\\":474,\\\"tem\\\":294.0},{\\\"time\\\":512,\\\"tem\\\":292.0},{\\\"time\\\":557,\\\"tem\\\":290.0},{\\\"time\\\":604,\\\"tem\\\":288.0},{\\\"time\\\":650,\\\"tem\\\":286.0},{\\\"time\\\":697,\\\"tem\\\":283.0},{\\\"time\\\":747,\\\"tem\\\":281.0},{\\\"time\\\":818,\\\"tem\\\":284.0},{\\\"time\\\":839,\\\"tem\\\":286.0},{\\\"time\\\":840,\\\"tem\\\":286.0}]}\"", "create_time": "2019-12-14T18:08:57+08:00" }, { "id": "f4a6a7fb162946bc8fc2e36edcc57e60", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2150\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576314690733,\\\"endTime\\\":1576315530641,\\\"quantity\\\":4,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":342.0},{\\\"time\\\":4,\\\"tem\\\":340.0},{\\\"time\\\":10,\\\"tem\\\":338.0},{\\\"time\\\":16,\\\"tem\\\":336.0},{\\\"time\\\":22,\\\"tem\\\":333.0},{\\\"time\\\":29,\\\"tem\\\":331.0},{\\\"time\\\":37,\\\"tem\\\":329.0},{\\\"time\\\":48,\\\"tem\\\":327.0},{\\\"time\\\":67,\\\"tem\\\":325.0},{\\\"time\\\":89,\\\"tem\\\":323.0},{\\\"time\\\":113,\\\"tem\\\":320.0},{\\\"time\\\":136,\\\"tem\\\":318.0},{\\\"time\\\":157,\\\"tem\\\":316.0},{\\\"time\\\":179,\\\"tem\\\":314.0},{\\\"time\\\":200,\\\"tem\\\":312.0},{\\\"time\\\":220,\\\"tem\\\":310.0},{\\\"time\\\":242,\\\"tem\\\":308.0},{\\\"time\\\":267,\\\"tem\\\":306.0},{\\\"time\\\":292,\\\"tem\\\":304.0},{\\\"time\\\":318,\\\"tem\\\":301.0},{\\\"time\\\":343,\\\"tem\\\":299.0},{\\\"time\\\":369,\\\"tem\\\":297.0},{\\\"time\\\":393,\\\"tem\\\":295.0},{\\\"time\\\":419,\\\"tem\\\":293.0},{\\\"time\\\":449,\\\"tem\\\":291.0},{\\\"time\\\":480,\\\"tem\\\":289.0},{\\\"time\\\":512,\\\"tem\\\":287.0},{\\\"time\\\":545,\\\"tem\\\":285.0},{\\\"time\\\":578,\\\"tem\\\":283.0},{\\\"time\\\":619,\\\"tem\\\":280.0},{\\\"time\\\":794,\\\"tem\\\":283.0},{\\\"time\\\":816,\\\"tem\\\":285.0},{\\\"time\\\":835,\\\"tem\\\":287.0},{\\\"time\\\":839,\\\"tem\\\":287.0}]}\"", "create_time": "2019-12-14T17:24:10+08:00" }, { "id": "0e56a68dd2a84976bcfc5ab1e3e76eb1", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2140\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576309338692,\\\"endTime\\\":1576310179599,\\\"quantity\\\":6,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":340.0},{\\\"time\\\":5,\\\"tem\\\":337.0},{\\\"time\\\":8,\\\"tem\\\":335.0},{\\\"time\\\":11,\\\"tem\\\":333.0},{\\\"time\\\":14,\\\"tem\\\":331.0},{\\\"time\\\":18,\\\"tem\\\":328.0},{\\\"time\\\":23,\\\"tem\\\":326.0},{\\\"time\\\":30,\\\"tem\\\":323.0},{\\\"time\\\":38,\\\"tem\\\":321.0},{\\\"time\\\":64,\\\"tem\\\":319.0},{\\\"time\\\":103,\\\"tem\\\":317.0},{\\\"time\\\":119,\\\"tem\\\":315.0},{\\\"time\\\":133,\\\"tem\\\":312.0},{\\\"time\\\":147,\\\"tem\\\":310.0},{\\\"time\\\":161,\\\"tem\\\":308.0},{\\\"time\\\":177,\\\"tem\\\":306.0},{\\\"time\\\":194,\\\"tem\\\":304.0},{\\\"time\\\":211,\\\"tem\\\":302.0},{\\\"time\\\":228,\\\"tem\\\":300.0},{\\\"time\\\":245,\\\"tem\\\":297.0},{\\\"time\\\":262,\\\"tem\\\":295.0},{\\\"time\\\":280,\\\"tem\\\":293.0},{\\\"time\\\":301,\\\"tem\\\":291.0},{\\\"time\\\":323,\\\"tem\\\":289.0},{\\\"time\\\":344,\\\"tem\\\":287.0},{\\\"time\\\":365,\\\"tem\\\":285.0},{\\\"time\\\":386,\\\"tem\\\":283.0},{\\\"time\\\":409,\\\"tem\\\":280.0},{\\\"time\\\":514,\\\"tem\\\":283.0},{\\\"time\\\":561,\\\"tem\\\":280.0},{\\\"time\\\":656,\\\"tem\\\":283.0},{\\\"time\\\":710,\\\"tem\\\":280.0},{\\\"time\\\":782,\\\"tem\\\":283.0},{\\\"time\\\":800,\\\"tem\\\":285.0},{\\\"time\\\":824,\\\"tem\\\":287.0},{\\\"time\\\":840,\\\"tem\\\":287.0}]}\"", "create_time": "2019-12-14T15:54:59+08:00" }, { "id": "31a9f4d3fea5469487a92f503b582150", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2133\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576306221777,\\\"endTime\\\":1576307062640,\\\"quantity\\\":4,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":337.0},{\\\"time\\\":8,\\\"tem\\\":335.0},{\\\"time\\\":13,\\\"tem\\\":332.0},{\\\"time\\\":18,\\\"tem\\\":330.0},{\\\"time\\\":24,\\\"tem\\\":328.0},{\\\"time\\\":33,\\\"tem\\\":326.0},{\\\"time\\\":56,\\\"tem\\\":324.0},{\\\"time\\\":78,\\\"tem\\\":322.0},{\\\"time\\\":99,\\\"tem\\\":319.0},{\\\"time\\\":118,\\\"tem\\\":317.0},{\\\"time\\\":137,\\\"tem\\\":315.0},{\\\"time\\\":155,\\\"tem\\\":313.0},{\\\"time\\\":173,\\\"tem\\\":311.0},{\\\"time\\\":191,\\\"tem\\\":309.0},{\\\"time\\\":213,\\\"tem\\\":307.0},{\\\"time\\\":235,\\\"tem\\\":305.0},{\\\"time\\\":258,\\\"tem\\\":303.0},{\\\"time\\\":282,\\\"tem\\\":300.0},{\\\"time\\\":303,\\\"tem\\\":298.0},{\\\"time\\\":325,\\\"tem\\\":296.0},{\\\"time\\\":348,\\\"tem\\\":294.0},{\\\"time\\\":374,\\\"tem\\\":292.0},{\\\"time\\\":403,\\\"tem\\\":290.0},{\\\"time\\\":434,\\\"tem\\\":288.0},{\\\"time\\\":464,\\\"tem\\\":286.0},{\\\"time\\\":494,\\\"tem\\\":284.0},{\\\"time\\\":525,\\\"tem\\\":281.0},{\\\"time\\\":831,\\\"tem\\\":284.0},{\\\"time\\\":840,\\\"tem\\\":284.0}]}\"", "create_time": "2019-12-14T15:03:02+08:00" }, { "id": "be57df7a3c9c4768be05a62931c22646", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2131\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576304928650,\\\"endTime\\\":1576305769548,\\\"quantity\\\":4,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":335.0},{\\\"time\\\":6,\\\"tem\\\":333.0},{\\\"time\\\":10,\\\"tem\\\":330.0},{\\\"time\\\":14,\\\"tem\\\":328.0},{\\\"time\\\":18,\\\"tem\\\":326.0},{\\\"time\\\":23,\\\"tem\\\":324.0},{\\\"time\\\":29,\\\"tem\\\":322.0},{\\\"time\\\":38,\\\"tem\\\":319.0},{\\\"time\\\":49,\\\"tem\\\":317.0},{\\\"time\\\":62,\\\"tem\\\":315.0},{\\\"time\\\":76,\\\"tem\\\":313.0},{\\\"time\\\":91,\\\"tem\\\":311.0},{\\\"time\\\":107,\\\"tem\\\":309.0},{\\\"time\\\":127,\\\"tem\\\":307.0},{\\\"time\\\":148,\\\"tem\\\":305.0},{\\\"time\\\":169,\\\"tem\\\":302.0},{\\\"time\\\":190,\\\"tem\\\":300.0},{\\\"time\\\":209,\\\"tem\\\":298.0},{\\\"time\\\":230,\\\"tem\\\":296.0},{\\\"time\\\":250,\\\"tem\\\":294.0},{\\\"time\\\":271,\\\"tem\\\":292.0},{\\\"time\\\":296,\\\"tem\\\":290.0},{\\\"time\\\":323,\\\"tem\\\":288.0},{\\\"time\\\":345,\\\"tem\\\":285.0},{\\\"time\\\":369,\\\"tem\\\":283.0},{\\\"time\\\":393,\\\"tem\\\":281.0},{\\\"time\\\":822,\\\"tem\\\":283.0},{\\\"time\\\":840,\\\"tem\\\":283.0}]}\"", "create_time": "2019-12-14T14:41:28+08:00" }, { "id": "bdc386de2fb14d8eb051acb8a898ba57", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2122\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576296095565,\\\"endTime\\\":1576296936486,\\\"quantity\\\":6,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":340.0},{\\\"time\\\":8,\\\"tem\\\":338.0},{\\\"time\\\":14,\\\"tem\\\":336.0},{\\\"time\\\":18,\\\"tem\\\":334.0},{\\\"time\\\":22,\\\"tem\\\":331.0},{\\\"time\\\":26,\\\"tem\\\":329.0},{\\\"time\\\":29,\\\"tem\\\":326.0},{\\\"time\\\":34,\\\"tem\\\":324.0},{\\\"time\\\":40,\\\"tem\\\":322.0},{\\\"time\\\":51,\\\"tem\\\":319.0},{\\\"time\\\":75,\\\"tem\\\":317.0},{\\\"time\\\":103,\\\"tem\\\":315.0},{\\\"time\\\":118,\\\"tem\\\":313.0},{\\\"time\\\":131,\\\"tem\\\":311.0},{\\\"time\\\":143,\\\"tem\\\":309.0},{\\\"time\\\":157,\\\"tem\\\":307.0},{\\\"time\\\":172,\\\"tem\\\":305.0},{\\\"time\\\":186,\\\"tem\\\":302.0},{\\\"time\\\":202,\\\"tem\\\":300.0},{\\\"time\\\":217,\\\"tem\\\":298.0},{\\\"time\\\":233,\\\"tem\\\":296.0},{\\\"time\\\":248,\\\"tem\\\":294.0},{\\\"time\\\":264,\\\"tem\\\":292.0},{\\\"time\\\":283,\\\"tem\\\":290.0},{\\\"time\\\":304,\\\"tem\\\":288.0},{\\\"time\\\":322,\\\"tem\\\":286.0},{\\\"time\\\":341,\\\"tem\\\":284.0},{\\\"time\\\":362,\\\"tem\\\":281.0},{\\\"time\\\":383,\\\"tem\\\":279.0},{\\\"time\\\":490,\\\"tem\\\":281.0},{\\\"time\\\":790,\\\"tem\\\":283.0},{\\\"time\\\":811,\\\"tem\\\":286.0},{\\\"time\\\":840,\\\"tem\\\":286.0}]}\"", "create_time": "2019-12-14T12:14:15+08:00" }, { "id": "a31050ba473f47589a091cc0ab47f5fc", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2114\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576292249552,\\\"endTime\\\":1576293090464,\\\"quantity\\\":6,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":341.0},{\\\"time\\\":4,\\\"tem\\\":338.0},{\\\"time\\\":7,\\\"tem\\\":336.0},{\\\"time\\\":10,\\\"tem\\\":334.0},{\\\"time\\\":14,\\\"tem\\\":331.0},{\\\"time\\\":18,\\\"tem\\\":329.0},{\\\"time\\\":22,\\\"tem\\\":326.0},{\\\"time\\\":27,\\\"tem\\\":324.0},{\\\"time\\\":34,\\\"tem\\\":322.0},{\\\"time\\\":51,\\\"tem\\\":320.0},{\\\"time\\\":95,\\\"tem\\\":318.0},{\\\"time\\\":108,\\\"tem\\\":316.0},{\\\"time\\\":122,\\\"tem\\\":314.0},{\\\"time\\\":135,\\\"tem\\\":311.0},{\\\"time\\\":149,\\\"tem\\\":309.0},{\\\"time\\\":164,\\\"tem\\\":307.0},{\\\"time\\\":181,\\\"tem\\\":305.0},{\\\"time\\\":199,\\\"tem\\\":303.0},{\\\"time\\\":216,\\\"tem\\\":301.0},{\\\"time\\\":232,\\\"tem\\\":299.0},{\\\"time\\\":248,\\\"tem\\\":297.0},{\\\"time\\\":265,\\\"tem\\\":295.0},{\\\"time\\\":281,\\\"tem\\\":292.0},{\\\"time\\\":301,\\\"tem\\\":290.0},{\\\"time\\\":322,\\\"tem\\\":288.0},{\\\"time\\\":343,\\\"tem\\\":286.0},{\\\"time\\\":364,\\\"tem\\\":284.0},{\\\"time\\\":385,\\\"tem\\\":282.0},{\\\"time\\\":408,\\\"tem\\\":280.0},{\\\"time\\\":493,\\\"tem\\\":282.0},{\\\"time\\\":584,\\\"tem\\\":280.0},{\\\"time\\\":647,\\\"tem\\\":282.0},{\\\"time\\\":790,\\\"tem\\\":284.0},{\\\"time\\\":810,\\\"tem\\\":286.0},{\\\"time\\\":840,\\\"tem\\\":286.0}]}\"", "create_time": "2019-12-14T11:10:09+08:00" }, { "id": "b280d74b7fc8499e8deea8fa97f43a90", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2105\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576289625514,\\\"endTime\\\":1576290466438,\\\"quantity\\\":4,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":336.0},{\\\"time\\\":5,\\\"tem\\\":334.0},{\\\"time\\\":8,\\\"tem\\\":332.0},{\\\"time\\\":12,\\\"tem\\\":329.0},{\\\"time\\\":16,\\\"tem\\\":327.0},{\\\"time\\\":22,\\\"tem\\\":325.0},{\\\"time\\\":31,\\\"tem\\\":323.0},{\\\"time\\\":53,\\\"tem\\\":321.0},{\\\"time\\\":75,\\\"tem\\\":319.0},{\\\"time\\\":95,\\\"tem\\\":316.0},{\\\"time\\\":113,\\\"tem\\\":314.0},{\\\"time\\\":129,\\\"tem\\\":312.0},{\\\"time\\\":144,\\\"tem\\\":310.0},{\\\"time\\\":160,\\\"tem\\\":308.0},{\\\"time\\\":180,\\\"tem\\\":306.0},{\\\"time\\\":200,\\\"tem\\\":304.0},{\\\"time\\\":219,\\\"tem\\\":302.0},{\\\"time\\\":238,\\\"tem\\\":300.0},{\\\"time\\\":258,\\\"tem\\\":297.0},{\\\"time\\\":278,\\\"tem\\\":295.0},{\\\"time\\\":297,\\\"tem\\\":293.0},{\\\"time\\\":319,\\\"tem\\\":291.0},{\\\"time\\\":342,\\\"tem\\\":289.0},{\\\"time\\\":364,\\\"tem\\\":287.0},{\\\"time\\\":389,\\\"tem\\\":285.0},{\\\"time\\\":413,\\\"tem\\\":283.0},{\\\"time\\\":439,\\\"tem\\\":281.0},{\\\"time\\\":812,\\\"tem\\\":283.0},{\\\"time\\\":840,\\\"tem\\\":283.0}]}\"", "create_time": "2019-12-14T10:26:25+08:00" }, { "id": "98c925b91bbc4566959a823eab6f5cbd", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-14", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2099\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576286245494,\\\"endTime\\\":1576287086399,\\\"quantity\\\":4,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":337.0},{\\\"time\\\":2,\\\"tem\\\":335.0},{\\\"time\\\":5,\\\"tem\\\":333.0},{\\\"time\\\":8,\\\"tem\\\":330.0},{\\\"time\\\":11,\\\"tem\\\":328.0},{\\\"time\\\":15,\\\"tem\\\":325.0},{\\\"time\\\":20,\\\"tem\\\":323.0},{\\\"time\\\":26,\\\"tem\\\":321.0},{\\\"time\\\":34,\\\"tem\\\":319.0},{\\\"time\\\":48,\\\"tem\\\":317.0},{\\\"time\\\":62,\\\"tem\\\":315.0},{\\\"time\\\":76,\\\"tem\\\":312.0},{\\\"time\\\":90,\\\"tem\\\":310.0},{\\\"time\\\":105,\\\"tem\\\":308.0},{\\\"time\\\":124,\\\"tem\\\":306.0},{\\\"time\\\":144,\\\"tem\\\":304.0},{\\\"time\\\":163,\\\"tem\\\":302.0},{\\\"time\\\":182,\\\"tem\\\":300.0},{\\\"time\\\":200,\\\"tem\\\":298.0},{\\\"time\\\":218,\\\"tem\\\":295.0},{\\\"time\\\":236,\\\"tem\\\":293.0},{\\\"time\\\":256,\\\"tem\\\":291.0},{\\\"time\\\":277,\\\"tem\\\":289.0},{\\\"time\\\":298,\\\"tem\\\":287.0},{\\\"time\\\":319,\\\"tem\\\":285.0},{\\\"time\\\":340,\\\"tem\\\":283.0},{\\\"time\\\":361,\\\"tem\\\":281.0},{\\\"time\\\":825,\\\"tem\\\":283.0},{\\\"time\\\":840,\\\"tem\\\":283.0}]}\"", "create_time": "2019-12-14T09:30:05+08:00" }, { "id": "6de5f58e7bd6446fa8189bd3679a237b", "tenant_id": "85bdd5674c024a9586f72a487eb102f3", "branch_id": "SH1028", "device_type": "2019", "serial": "DE055VB", "day": "2019-12-13", "dashtype": "haccp", "data": "\"{\\\"vat\\\":0,\\\"chNR\\\":\\\"2085\\\",\\\"program\\\":\\\"原味鸡\\\",\\\"startTime\\\":1576240389160,\\\"endTime\\\":1576241230070,\\\"quantity\\\":4,\\\"programData\\\":[{\\\"time\\\":0,\\\"tem\\\":328.0},{\\\"time\\\":4,\\\"tem\\\":326.0},{\\\"time\\\":7,\\\"tem\\\":323.0},{\\\"time\\\":11,\\\"tem\\\":321.0},{\\\"time\\\":15,\\\"tem\\\":318.0},{\\\"time\\\":20,\\\"tem\\\":316.0},{\\\"time\\\":26,\\\"tem\\\":314.0},{\\\"time\\\":38,\\\"tem\\\":312.0},{\\\"time\\\":59,\\\"tem\\\":309.0},{\\\"time\\\":76,\\\"tem\\\":307.0},{\\\"time\\\":95,\\\"tem\\\":305.0},{\\\"time\\\":111,\\\"tem\\\":303.0},{\\\"time\\\":128,\\\"tem\\\":301.0},{\\\"time\\\":147,\\\"tem\\\":299.0},{\\\"time\\\":167,\\\"tem\\\":297.0},{\\\"time\\\":186,\\\"tem\\\":295.0},{\\\"time\\\":204,\\\"tem\\\":293.0},{\\\"time\\\":225,\\\"tem\\\":290.0},{\\\"time\\\":246,\\\"tem\\\":288.0},{\\\"time\\\":267,\\\"tem\\\":286.0},{\\\"time\\\":287,\\\"tem\\\":284.0},{\\\"time\\\":307,\\\"tem\\\":282.0},{\\\"time\\\":329,\\\"tem\\\":280.0},{\\\"time\\\":501,\\\"tem\\\":282.0},{\\\"time\\\":829,\\\"tem\\\":284.0},{\\\"time\\\":840,\\\"tem\\\":284.0}]}\"", "create_time": "2019-12-13T20:45:51+08:00" }], "message": "success", "total": 47, "total_page": 5 }
+
+}
+
+async function a17(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: 's',
+    total: 10,
+    total_page: 1,
+    data: [
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      },
+      {
+        btn_id: 'fdsa',
+        btn: 1,
+        data: [
+          {
+            epqc_category_code: '香辣鸡翅',
+            cooking_time: 15
+          },
+          {
+            epqc_category_code: '香辣鸡腿肉',
+            cooking_time: 20
+          }
+        ]
+
+      }
+    ]
+
+  }
+}
+  app.use(router.routes());
+  // listen
+
+  if (!module.parent) app.listen(3000);
