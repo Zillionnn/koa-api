@@ -56,6 +56,8 @@ router.get('/api/test', showTest)
   // fryer haccp
   // .post(`/iot-broker/api/v1/iot/device/dashboard/query_device_day`, a16)
   .get(`/iot-broker/api/v1/iot/frier-press-btn/list`, a17)
+  .post(`/dev/api/v1/device/statistic/alarm/overall/level`, a18)
+  .post(`/dev/api/v1/device/statistic/alarm/status`, a19)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -129,16 +131,22 @@ async function a3(ctx, next) {
         role: 20,
         stores: [
           {
-            store_id: 'xxxx',
-            name: '北京'
+            store_id: 'beijing',
+            name: '北京',
+            longitude: '116.445088',
+            latitude: '39.905416'
           },
           {
-            store_id: 'xxxxD',
-            name: '南京'
+            store_id: 'nanjing',
+            name: '南京',
+            longitude: '118.835012',
+            latitude: '32.066477'
           },
           {
-            store_id: 'xfxxxD',
-            name: '常山'
+            store_id: 'shanghai',
+            name: '上海',
+            longitude: '121.447428',
+            latitude: '31.161181'
           }
         ]
 
@@ -610,7 +618,53 @@ async function a17(ctx, next) {
 
   }
 }
-  app.use(router.routes());
-  // listen
 
-  if (!module.parent) app.listen(3000);
+
+async function a18(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        except_level: 1,
+        total: 42
+      },
+      {
+        except_level: 2,
+        total: 423
+      },
+      {
+        except_level: 3,
+        total: 4234
+      }
+      , {
+        except_level: 4,
+        total: 4265
+      }
+      ,
+      {
+        except_level: 5,
+        total: 42436
+      }, {
+        except_level: 6,
+        total: 6544
+      }
+    ]
+
+  }
+}
+
+async function a19(ctx,next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: {
+      total: 10
+    }
+
+  }
+}
+app.use(router.routes());
+// listen
+
+if (!module.parent) app.listen(3000);
