@@ -51,13 +51,17 @@ router.get('/api/test', showTest)
   .get(`/dev/api/v1/devices/inspect`, a10)
   .get(`/usr/api/v1/store/activated/total`, a11)
   .post(`/core/api/v1/devicedata/list`, a12)
-  .post(`/iot-broker/api/v1/iot/device/dashboard/query_device_day`, a14)
-  .post(`/iot-broker/api/v1/iot/power/serial/hour/query_day`, a15)
+  .post(`/datak/api/v1/iot/device/dashboard/query_device_day`, a14)
+  .post(`/datak/api/v1/iot/power/serial/hour/query_day`, a15)
   // fryer haccp
-  // .post(`/iot-broker/api/v1/iot/device/dashboard/query_device_day`, a16)
-  .get(`/iot-broker/api/v1/iot/frier-press-btn/list`, a17)
+  // .post(`/datak/api/v1/iot/device/dashboard/query_device_day`, a16)
+  .get(`/datak/api/v1/iot/frier-press-btn/list`, a17)
   .post(`/dev/api/v1/device/statistic/alarm/overall/level`, a18)
   .post(`/dev/api/v1/device/statistic/alarm/status`, a19)
+  .get(`/usr/api/v1/store_branch/list`, a20)
+  .post(`/dev/api/v1/device/statistic/device_type/branch/overall`, a21)
+  .post(`/datak/api/v1/iot/energy/water/average/day`, a22)
+  .post(`/dev/api/v1/device/statistic/alarm/overall/group`, a23)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -89,8 +93,14 @@ async function a1(ctx, next) {
     message: '',
     data: [
       {
-        psid: '111111fdsv',
-        charge_name: '负责人名称',
+        psid: 'psid001',
+        charge_name: '负责人001',
+        role_name: '角色名称',
+        role: 12
+      },
+      {
+        psid: 'psid002',
+        charge_name: '负责人002',
         role_name: '角色名称',
         role: 12
       }
@@ -400,31 +410,61 @@ async function a10(ctx, next) {
     total_page: 2,
     data: [
       {
-        m_category: '厨房设备',
-        serial: '23',
-        alias: 'ccc32',
-        branch_number: '34543',
-        day: '2019-12-12',
-        alarms: 5,
-        last_update: ''
+        serial: '1111',
+        alias: '23543',
+        inspects: [
+          {
+            day: '2019-12-01',
+            alarms: 2
+          },
+          {
+            day: '2019-12-02',
+            alarms: 4
+          },
+          {
+            day: '2019-12-04',
+            alarms: 4
+          }
+        ]
+
       },
       {
-        m_category: '厨房设备',
-        serial: '2n333',
-        alias: 'b32',
-        branch_number: '34543',
-        day: '2019-12-13',
-        alarms: 0,
-        last_update: ''
+        serial: '11gterg11',
+        alias: '23543',
+        inspects: [
+          {
+            day: '2019-12-01',
+            alarms: 2
+          },
+          {
+            day: '2019-12-02',
+            alarms: 4
+          },
+          {
+            day: '2019-12-04',
+            alarms: 4
+          }
+        ]
+
       },
       {
-        m_category: '厨房设备',
-        serial: '2v3',
-        alias: 'a32',
-        branch_number: '34543',
-        day: '2019-12-14',
-        alarms: 12,
-        last_update: ''
+        serial: '1111',
+        alias: '炸锅3',
+        inspects: [
+          {
+            day: '2019-12-01',
+            alarms: 2
+          },
+          {
+            day: '2019-12-02',
+            alarms: 0
+          },
+          {
+            day: '2019-12-04',
+            alarms: 0
+          }
+        ]
+
       }
     ]
   }
@@ -449,7 +489,7 @@ async function a14(ctx, next) {
 }
 
 async function a15(ctx, next) {
-  ctx.response.body = { "code": 0, "data": [{ "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "00:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "01:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "02:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "03:00", "total": 2.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "04:00", "total": 3.4, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "05:00", "total": 6.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "06:00", "total": 9.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "07:00", "total": 9.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "08:00", "total": 12.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "09:00", "total": 14.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "10:00", "total": 18.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "11:00", "total": 18.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "12:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "13:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "14:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "15:00", "total": 22.1, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "16:00", "total": 24.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "17:00", "total": 24.6, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "18:00", "total": 26.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "19:00", "total": 29.3, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "20:00", "total": 31.6, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "21:00", "total": 33.4, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "22:00", "total": 35, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "23:00", "total": 35, "create_time": "0001-01-01T00:00:00Z" }], "message": "success" }
+  ctx.response.body = { "code": 0, "data": [{ "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "00:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "01:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "02:00", "total": 0, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "03:00", "total": 2.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "04:00", "total": 30.4, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "05:00", "total": 46.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "06:00", "total": 9.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "07:00", "total": 9.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "08:00", "total": 12.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "09:00", "total": 14.8, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "10:00", "total": 18.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "11:00", "total": 18.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "12:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "13:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "14:00", "total": 20.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "15:00", "total": 22.1, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "16:00", "total": 24.5, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "17:00", "total": 24.6, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "18:00", "total": 26.9, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "19:00", "total": 29.3, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "20:00", "total": 31.6, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "21:00", "total": 33.4, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "22:00", "total": 35, "create_time": "0001-01-01T00:00:00Z" }, { "id": "", "tenant_id": "", "branch_number": "", "power_type": 0, "device_type": "", "serial": "", "day": "", "hour": "23:00", "total": 35, "create_time": "0001-01-01T00:00:00Z" }], "message": "success" }
 }
 
 async function a16(ctx, next) {
@@ -654,13 +694,93 @@ async function a18(ctx, next) {
   }
 }
 
-async function a19(ctx,next) {
+async function a19(ctx, next) {
   ctx.response.body = {
     code: 0,
     message: '',
     data: {
       total: 10
     }
+
+  }
+}
+
+async function a20(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        id: '2,',
+        store_id: '325',
+        floor: 1,
+        sketch: 'https://tse3-mm.cn.bing.net/th/id/OIP.DdSVYKdAJBaSLL1Guf7WugHaFt?w=282&h=210&c=7&o=5&pid=1.7'
+      },
+      {
+        id: '2,',
+        store_id: '325',
+        floor: 2,
+        sketch: 'https://tse4-mm.cn.bing.net/th/id/OIP.vFFZqkJdE0QuTMoXt5AgvAHaF7?w=278&h=213&c=7&o=5&pid=1.7'
+      }
+    ]
+
+  }
+}
+
+async function a21(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: {
+      device_type: 1,
+      total: 0
+    }
+
+  }
+}
+
+
+async function a22(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    total: 99999,
+    data: [
+      {
+        day: '2019-12-01',
+        average: 3,
+        total: 453,
+      },
+      {
+        day: '2019-12-02',
+        average: 53,
+        total: 453,
+      }
+    ]
+
+  }
+}
+
+
+async function a23(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    total: 99999,
+    data: [
+      {
+        groups: 1,
+        total: 9999,
+      },
+      {
+        groups: 2,
+        total: 9998,
+      },
+      {
+        groups: 3,
+        total: 9997,
+      }
+    ]
 
   }
 }
