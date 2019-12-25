@@ -92,7 +92,7 @@ async function a1(ctx, next) {
   console.log(ctx.request.query)
   const psid = ctx.request.query.psid
   let data = []
-  if (psid === 'psid001') {
+  if (psid === 'mm001') {
     data = [
       {
         psid: 'i002',
@@ -136,6 +136,38 @@ async function a1(ctx, next) {
       {
         psid: 'i007',
         charge_name: 'john',
+        role_name: 'AMS',
+        role: 3
+      }
+    ]
+  } 
+  if (psid === 'i005') {
+    data = [
+      {
+        psid: 'i010',
+        charge_name: 'kaat',
+        role_name: 'AMS',
+        role: 3
+      },
+      {
+        psid: 'i011',
+        charge_name: 'loneyy',
+        role_name: 'AMS',
+        role: 3
+      }
+    ]
+  } 
+  if (psid === 'i006') {
+    data = [
+      {
+        psid: 'i0110',
+        charge_name: 'bgds',
+        role_name: 'AMS',
+        role: 3
+      },
+      {
+        psid: 'i014',
+        charge_name: 'kon',
         role_name: 'AMS',
         role: 3
       }
