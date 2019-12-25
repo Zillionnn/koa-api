@@ -64,6 +64,7 @@ router.get('/api/test', showTest)
   .post(`/dev/api/v1/device/statistic/alarm/overall/group`, a23)
   .get(`/dev/api/v1/devices/startup/query`, a24)
   .get(`/dev/api/v1/devices/startup/plan/serial/123`, a25)
+  .get(`/usr/api/v1/store/admin-subs/list`, a26)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -89,24 +90,62 @@ async function showTest(ctx, next) {
 
 async function a1(ctx, next) {
   console.log(ctx.request.query)
+  const psid = ctx.request.query.psid
+  let data = []
+  if (psid === 'psid001') {
+    data = [
+      {
+        psid: 'i002',
+        charge_name: 'Jack',
+        role_name: 'AMS',
+        role: 3
+      },
+      {
+        psid: 'i003',
+        charge_name: 'Ben',
+        role_name: 'AMS',
+        role: 3
+      }
+    ]
+  }
+
+  if (psid === 'i002') {
+    data = [
+      {
+        psid: 'i005',
+        charge_name: 'Merry',
+        role_name: 'AMS',
+        role: 3
+      },
+      {
+        psid: 'i004',
+        charge_name: 'ssBen',
+        role_name: 'AMS',
+        role: 3
+      }
+    ]
+  }
+  if (psid === 'i003') {
+    data = [
+      {
+        psid: 'i006',
+        charge_name: 'cat',
+        role_name: 'AMS',
+        role: 3
+      },
+      {
+        psid: 'i007',
+        charge_name: 'john',
+        role_name: 'AMS',
+        role: 3
+      }
+    ]
+  }
   ctx.response.body = {
     code: 0,
 
     message: '',
-    data: [
-      {
-        psid: 'psid001',
-        charge_name: '负责人001',
-        role_name: '角色名称',
-        role: 12
-      },
-      {
-        psid: 'psid002',
-        charge_name: '负责人002',
-        role_name: '角色名称',
-        role: 12
-      }
-    ]
+    data: data
 
   }
 }
@@ -120,10 +159,10 @@ async function a2(ctx, next) {
       access_token: 'mmmmmmmmmmmmmmmm',
       user_id: 'd',
       name: '超管',
-      role: 10,
+      role: 22,
       status: 1,
       role_id: '234',
-      roleName: '34'
+      roleName: 'RSC'
     }
 
   }
@@ -171,7 +210,7 @@ async function a3(ctx, next) {
 async function a4(ctx, next) {
   console.log(ctx.request.query)
   let data = []
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 10; i++) {
     data.push(
       {
         alarm_id: '?alrmid',
@@ -957,6 +996,44 @@ async function a25(ctx, next) {
       }
     ]
 
+  }
+}
+
+async function a26(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        store_name: 'beijing',
+        store_id: 'beijing',
+        rgm_name: 'rgm_admin',
+        activated: 1,
+        banking_hour: 4,
+        longitude: 4,
+        latitude: 4
+      },
+      {
+        store_name: 'tianjin',
+        store_id: 'tianjin',
+        rgm_name: 'rgm_admin',
+        activated: 1,
+        banking_hour: 4,
+        longitude: 4,
+        latitude: 4
+
+      }
+      , {
+        store_name: 'nanjing',
+        store_id: 'nanjing',
+        rgm_name: 'rgm_admin',
+        activated: 1,
+        banking_hour: 4,
+        longitude: 4,
+        latitude: 4
+
+      }
+    ]
   }
 }
 app.use(router.routes());
