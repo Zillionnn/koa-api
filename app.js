@@ -140,7 +140,7 @@ async function a1(ctx, next) {
         role: 3
       }
     ]
-  } 
+  }
   if (psid === 'i005') {
     data = [
       {
@@ -156,7 +156,7 @@ async function a1(ctx, next) {
         role: 3
       }
     ]
-  } 
+  }
   if (psid === 'i006') {
     data = [
       {
@@ -202,11 +202,10 @@ async function a2(ctx, next) {
 
 async function a3(ctx, next) {
   console.log(ctx.request.query)
-  ctx.response.body = {
-    code: 0,
-
-    message: '',
-    data: [
+  const user_psid = ctx.request.query.user_psid
+  let data = []
+  if (user_psid === 'mm001') {
+    data = [
       {
         psid: '?psid',
         charge_name: '?chargname',
@@ -219,23 +218,91 @@ async function a3(ctx, next) {
             longitude: '116.445088',
             latitude: '39.905416'
           },
+          // {
+          //   store_id: 'nanjing',
+          //   name: '南京',
+          //   longitude: '118.835012',
+          //   latitude: '32.066477'
+          // },
+          // {
+          //   store_id: 'shanghai',
+          //   name: '上海',
+          //   longitude: '121.447428',
+          //   latitude: '31.161181'
+          // }
+        ]
+
+      }
+    ]
+  }
+  if (user_psid === 'i002') {
+    data = [
+      {
+        psid: '?psid',
+        charge_name: '?chargname',
+        role_name: 'role name',
+        role: 20,
+        stores: [
           {
             store_id: 'nanjing',
             name: '南京',
             longitude: '118.835012',
             latitude: '32.066477'
-          },
-          {
-            store_id: 'shanghai',
-            name: '上海',
-            longitude: '121.447428',
-            latitude: '31.161181'
           }
         ]
 
       }
     ]
+  }
+  if (user_psid === 'i005') {
+    data = [
+      {
+        psid: '?psid',
+        charge_name: '?chargname',
+        role_name: 'role name',
+        role: 20,
+        stores: [
+          {
+            store_id: 'hangzhou',
+            name: '杭州',
+            longitude: '116.445088',
+            latitude: '39.905416'
+          },
+          {
+            store_id: 'i005-' + Math.floor(Math.random() * 100),
+            name: 'i005-' + Math.floor(Math.random() * 100),
+            longitude: '116.445088',
+            latitude: '39.905416'
+          }
+        ]
 
+      }
+    ]
+  }
+
+  if (user_psid === 'i004') {
+    data = [
+      {
+        psid: '?psid',
+        charge_name: '?chargname',
+        role_name: 'role name',
+        role: 20,
+        stores: [
+          {
+            store_id: 'I004-' + Math.floor(Math.random() * 100),
+            name: 'I004-' + Math.floor(Math.random() * 100),
+            longitude: '116.445088',
+            latitude: '39.905416'
+          }
+        ]
+
+      }
+    ]
+  }
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: data
   }
 }
 
