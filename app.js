@@ -66,6 +66,9 @@ router.get('/api/test', showTest)
   .get(`/dev/api/v1/devices/startup/query`, a24)
   .get(`/dev/api/v1/devices/startup/plan/serial/123`, a25)
   .get(`/usr/api/v1/store/admin-subs/list`, a26)
+  .get(`/datak/api/v1/iot/universal-report-template`, a27)
+  .get(`/dev/api/devices/collection/list`, a28)
+  .get(`/dev/api/devices/brand/list`, a29)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -1132,6 +1135,74 @@ async function a26(ctx, next) {
         longitude: 4,
         latitude: 4
 
+      }
+    ]
+  }
+}
+
+
+async function a27(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        id: '235',
+        user_id: 'd',
+        name: 'rsc',
+        value: "{\"config\":{\"checkedCityList\":[\"上海KFC\",\"上海PH\",\"无锡\",\"苏州\",\"南京\",\"浙江\",\"天津\",\"沈阳\",\"哈尔滨\",\"福州\",\"武汉\",\"湖南\",\"成都\",\"西安\",\"杭州\",\"青岛\",\"河南\"],\"checkedBrandList\":[\"PH HS\"],\"checkedCityLevelList\":[\"Tier 0\"],\"checkedRestaurantStatusList\":[],\"checkedKfcTypeList\":[],\"checkedPhTypeList\":[],\"checkedLsTypeList\":[],\"checkedCqsrTypeList\":[],\"checkedTacobellTypeList\":[],\"checkedCoffijoyTypeList\":[],\"checkedKitchenTypeList\":[],\"checkedDesignTypeList\":[],\"checkedReportTypeList\":[],\"checkedJoin\":[],\"checkedIsCooperate\":[],\"checkedDeskType\":[\"小型桌椅\"],\"checkedShoppingType\":[\"X/A\",\"客运站+D\",\"C+客运站\",\"客运站+C\",\"购物中心+C\",\"购物中滚+D\",\"购物中心\",\"专业市场+C\",\"交通枢纽+D\"],\"checkedChildPlayArea\":0,\"checkedElevator\":1,\"checkedBackdoor\":1,\"checkedSignboard\":0,\"checkedToilet\":0,\"restaurantInfo\":\"aaaaaaaa\",\"projectLeader\":\"abbbbbb\",\"projectEngineer\":\"cccccc\",\"projectManage\":\"ddddddddddddd\",\"checkedProjectTypeList\":[\"Major IE\"],\"actualDecoration\":{\"selectValue\":\"选项1\",\"value\":\"ggggggggggg\",\"value1\":\"nnnnnnnnnn\",\"componentValue\":\"ggggggggggg\",\"componentValue1\":\"nnnnnnnnnnnnnnnnnnnnnn\"},\"actualKitchen\":null,\"actualSeat\":null,\"rscMeeting\":null,\"houseExchangeDate\":{\"selectValue\":\"选项1\",\"value\":\"范德萨\",\"value1\":null},\"actualStart\":{\"selectValue\":\"选项2\",\"value\":\"nnnnnnnnnnnnnnnnnnnnnnn\",\"value1\":\"mmmmmmmmmmm\",\"isInclude\":true,\"componentValue\":\"bbbbbbbbb\",\"componentValue1\":\"mmmmmmmmmmm\"},\"actualEnd\":{\"selectValue\":\"选项2\",\"value\":null,\"value1\":null,\"isInclude\":true,\"componentValue1\":\"gbfdshbgfdf\",\"componentValue\":\"就没没没没没没没没没没没没没没没没没没\"},\"planOpen\":null,\"actualOpen\":{\"componentValue\":null,\"componentValue1\":\"广泛的\",\"selectValue\":null,\"isInclude\":null},\"firstInspect\":null,\"finalInspect\":null,\"closeAccount\":{\"componentValue\":\"bfdsfdg\",\"componentValue1\":\"gfdsbfdsb\",\"selectValue\":\"选项1\"},\"investCa\":null,\"estimate\":null,\"contractPrice\":null,\"finalPrice\":null,\"effectiveDuration\":null,\"baseArea\":{\"componentValue\":\"888888888888888888\",\"componentValue1\":\"00000000000000000\",\"selectValue\":\"选项2\"},\"buildArea\":null,\"designUploadDate\":null},\"query\":{\"temperture\":[],\"humAndEtha\":[\"outsideHumidity\",\"outsideEnthalpy\"],\"electric\":[],\"voltageCurrent\":[],\"waterVolume\":[\"复选框 A\"],\"duration\":[],\"other\":[],\"date\":[],\"alarmLevel\":[],\"deviceType\":[],\"deviceCategory\":[],\"brand\":[],\"model\":[]}}",
+        update_time: new Date()
+      }
+    ]
+  }
+}
+
+async function a28(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    total_page: 1,
+    total: 1,
+    data: [
+      {
+        collect_id: '1',
+        device_type: '2002',
+        name: '烤箱',
+        meta_device_id: '?',
+        sketch: [],
+        disable: 0,
+        m_category: 1,
+        s_category: 3,
+        open_way: 3,
+        close_way: 3
+      }
+    ]
+
+  }
+}
+
+async function a29(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    total_page: 1,
+    total: 1,
+    data: [
+      {
+        brand_id: '32',
+        name: 'Nike',
+        description: '',
+        mf_name: '',
+        mf_id: '',
+        enable: 1
+      },
+      {
+        brand_id: '31462',
+        name: 'Adidas',
+        description: '',
+        mf_name: '',
+        mf_id: '',
+        enable: 1
       }
     ]
   }
