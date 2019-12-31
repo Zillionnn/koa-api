@@ -69,6 +69,10 @@ router.get('/api/test', showTest)
   .get(`/datak/api/v1/iot/universal-report-template`, a27)
   .get(`/dev/api/devices/collection/list`, a28)
   .get(`/dev/api/devices/brand/list`, a29)
+  .post(`/datak/api/v1/iot/energy/power/average/query_category_day`, a30)
+  .post(`/datak/api/v1/iot/energy/power/average-area/query_category_day`, a31)
+  .post(`/datak/api/v1/iot/energy/power/average-area/query_category_week`, a32)
+  .post(`/datak/api/v1/iot/energy/power/average/query_category_week`, a33)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -1108,7 +1112,7 @@ async function a26(ctx, next) {
     message: '',
     data: [
       {
-        store_name: 'beijing',
+        store_name: '北京',
         store_id: 'beijing',
         rgm_name: 'rgm_admin',
         activated: 1,
@@ -1117,7 +1121,7 @@ async function a26(ctx, next) {
         latitude: 4
       },
       {
-        store_name: 'tianjin',
+        store_name: '天津',
         store_id: 'tianjin',
         rgm_name: 'rgm_admin',
         activated: 1,
@@ -1127,7 +1131,7 @@ async function a26(ctx, next) {
 
       }
       , {
-        store_name: 'nanjing',
+        store_name: '南京',
         store_id: 'nanjing',
         rgm_name: 'rgm_admin',
         activated: 1,
@@ -1205,6 +1209,95 @@ async function a29(ctx, next) {
         enable: 1
       }
     ]
+  }
+}
+
+async function a31(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        day: '2019-01-01',
+        average: 39
+      },
+      {
+        day: '2019-01-04',
+        average: 30
+      },
+      {
+        day:'2019-01-15',
+        average:49
+      }
+    ]
+
+  }
+}
+
+
+async function a30(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        day: '2019-01-01',
+        average: 39
+      },
+      {
+        day: '2019-01-04',
+        average: 30
+      },
+      {
+        day:'2019-01-15',
+        average:49
+      }
+    ]
+
+  }
+}
+
+
+async function a32(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        week: '1',
+        average: 39
+      },
+      {
+        week: '2',
+        average: 30
+      },
+      {
+        week:'3',
+        average:49
+      }
+    ]
+
+  }
+}
+async function a33(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        week: '1',
+        average: 39
+      },
+      {
+        week: '2',
+        average: 30
+      },
+      {
+        week:'3',
+        average:49
+      }
+    ]
+
   }
 }
 app.use(router.routes());
