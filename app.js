@@ -73,6 +73,13 @@ router.get('/api/test', showTest)
   .post(`/datak/api/v1/iot/energy/power/average-area/query_category_day`, a31)
   .post(`/datak/api/v1/iot/energy/power/average-area/query_category_week`, a32)
   .post(`/datak/api/v1/iot/energy/power/average/query_category_week`, a33)
+
+  .post(`/datak/api/v1/iot/energy/power/average-area/query_month`, a35)
+  .post(`/datak/api/v1/iot/energy/power/average-area/query_week`, a36)
+  .post(`/datak/api/v1/iot/energy/power/average-area/query_year`, a37)
+  .post(`/datak/api/v1/iot/energy/water/average/query_week`, a38)
+  .post(`/datak/api/v1/iot/energy/water/average/query_month`, a39)
+  .post(`/datak/api/v1/iot/energy/water/average/query_year`, a40)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -1226,8 +1233,8 @@ async function a31(ctx, next) {
         average: 30
       },
       {
-        day:'2019-01-15',
-        average:49
+        day: '2019-01-15',
+        average: 49
       }
     ]
 
@@ -1249,8 +1256,8 @@ async function a30(ctx, next) {
         average: 30
       },
       {
-        day:'2019-01-15',
-        average:49
+        day: '2019-01-15',
+        average: 49
       }
     ]
 
@@ -1272,8 +1279,8 @@ async function a32(ctx, next) {
         average: 30
       },
       {
-        week:'3',
-        average:49
+        week: '3',
+        average: 49
       }
     ]
 
@@ -1293,13 +1300,113 @@ async function a33(ctx, next) {
         average: 30
       },
       {
-        week:'3',
-        average:49
+        week: '3',
+        average: 49
       }
     ]
 
   }
 }
+
+async function a35(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: {
+      average: 500
+    }
+  }
+}
+
+
+async function a36(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        week: 1,
+        average: 3
+      },
+      {
+        week: 2,
+        average: 30
+      }
+    ]
+  }
+}
+
+
+async function a37(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        year: 1,
+        average: 300
+      },
+      {
+        year: 2,
+        average: 320
+      }
+    ]
+  }
+}
+
+async function a38(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        week: 1,
+        average: 30
+      },
+      {
+        week: 2,
+        average: 32.250
+      }
+    ]
+  }
+}
+
+
+async function a39(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        month: 1,
+        average: 30
+      },
+      {
+        month: 2,
+        average: 32.250
+      }
+    ]
+  }
+}
+
+
+async function a40(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: [
+      {
+        year: 1,
+        average: 3001
+      },
+      {
+        year: 2,
+        average: 3283.250
+      }
+    ]
+  }
+}
+
 app.use(router.routes());
 // listen
 
