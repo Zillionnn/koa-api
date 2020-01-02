@@ -273,8 +273,8 @@ async function a3(ctx, next) {
           {
             store_id: 'hangzhou',
             name: '杭州',
-            longitude: '116.445088',
-            latitude: '39.905416'
+            longitude: '120.253328',
+            latitude: '30.278507'
           },
           {
             store_id: 'i005-' + Math.floor(Math.random() * 100),
