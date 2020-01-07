@@ -199,20 +199,12 @@ async function a1(ctx, next) {
 
 async function a2(ctx, next) {
   console.log(ctx)
-  ctx.response.body = {
-    code: 0,
-    message: '',
-    data: {
-      access_token: 'mmmmmmmmmmmmmmmm',
-      user_id: 'd',
-      name: '超管',
-      role: 22,
-      status: 1,
-      role_id: '234',
-      roleName: 'RSC'
-    }
+const p = 
+  {"front":[{"menu":"概况面板","name":"Home","isShow":false},{"menu":"餐厅详情","name":"RestaurantDetail","isShow":true},{"menu":"报警管理","name":"FaultManagement","isShow":true},{"menu":"能源管理","name":"EnergyManagement","isShow":false},{"menu":"万能工作表","name":"Report","isShow":true},{"menu":"配置管理","name":"Config","isShow":true}]
 
-  }
+}
+  ctx.response.body = { "code": 0, 
+  "data": { "access_token": "NDFjYWM4OGVmZDU1NDA1M2E4ZTEzZGI0N2ExOGQ4MjI5MDNjYWRiYTkxODk0NzFkOWUwYzUwZGU2ZTg4YjM1MQ==", "name": "RSC", "roleList": [{ "name": "CM", "permissions": JSON.stringify(p), "remark": null, "role": 19, "role_id": "2705193cd146472fb49303f395259475" }], "status": 1, "user_id": "100562884" }, "message": "" }
 }
 
 async function a3(ctx, next) {
