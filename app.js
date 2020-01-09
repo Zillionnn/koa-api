@@ -80,6 +80,7 @@ router.get('/api/test', showTest)
   .post(`/datak/api/v1/iot/energy/water/average/query_week`, a38)
   .post(`/datak/api/v1/iot/energy/water/average/query_month`, a39)
   .post(`/datak/api/v1/iot/energy/water/average/query_year`, a40)
+  .get(`/usr/api/v1/user/role/list` , a41)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -188,6 +189,22 @@ async function a1(ctx, next) {
       }
     ]
   }
+  if (psid === '100562884') {
+    data = [
+      {
+        psid: 'i002',
+        charge_name: 'Jack',
+        role_name: 'AMS',
+        role: 3
+      },
+      {
+        psid: 'i003',
+        charge_name: 'Ben',
+        role_name: 'AMS',
+        role: 3
+      }
+    ]
+  }
   ctx.response.body = {
     code: 0,
 
@@ -199,14 +216,21 @@ async function a1(ctx, next) {
 
 async function a2(ctx, next) {
   console.log(ctx)
-const p = 
-  {"front":[{"menu":"概况面板","name":"Home","isShow":false},{"menu":"餐厅详情","name":"RestaurantDetail","isShow":true},{"menu":"报警管理","name":"FaultManagement","isShow":true},{"menu":"能源管理","name":"EnergyManagement","isShow":false},{"menu":"万能工作表","name":"Report","isShow":true},{"menu":"配置管理","name":"Config","isShow":true}]
+  const p =
+  {
+    "front": [{ "menu": "概况面板", "name": "Home", "isShow": true }, { "menu": "餐厅详情", "name": "RestaurantDetail", "isShow": true }, { "menu": "报警管理", "name": "FaultManagement", "isShow": true }, { "menu": "能源管理", "name": "EnergyManagement", "isShow": true }, { "menu": "万能工作表", "name": "Report", "isShow": true }, { "menu": "配置管理", "name": "Config", "isShow": true }]
 
+  }
+  ctx.response.body = {
+    "code": 0,
+    "data": { "access_token": "NDFjYWM4OGVmZDU1NDA1M2E4ZTEzZGI0N2ExOGQ4MjI5MDNjYWRiYTkxODk0NzFkOWUwYzUwZGU2ZTg4YjM1MQ==", "name": "RSC", "roleList": [{ "name": "RSC", "permissions": JSON.stringify(p), "remark": null, "role": 22, "role_id": "2705193cd146472fb49303f395259475" }], "status": 1, "user_id": "100562884" }, "message": ""
+  }
 }
-  ctx.response.body = { "code": 0, 
-  "data": { "access_token": "NDFjYWM4OGVmZDU1NDA1M2E4ZTEzZGI0N2ExOGQ4MjI5MDNjYWRiYTkxODk0NzFkOWUwYzUwZGU2ZTg4YjM1MQ==", "name": "RSC", "roleList": [{ "name": "CM", "permissions": JSON.stringify(p), "remark": null, "role": 19, "role_id": "2705193cd146472fb49303f395259475" }], "status": 1, "user_id": "100562884" }, "message": "" }
+function getRdNum(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
 }
-
 async function a3(ctx, next) {
   console.log(ctx.request.query)
   const user_psid = ctx.request.query.user_psid
@@ -300,6 +324,55 @@ async function a3(ctx, next) {
             name: 'I004-' + Math.floor(Math.random() * 100),
             longitude: '116.445088',
             latitude: '39.905416'
+          }
+        ]
+
+      }
+    ]
+  }
+  if (user_psid === '100562884') {
+    data = [
+      {
+        psid: '?psid',
+        charge_name: '?chargname',
+        role_name: 'role name',
+        role: 20,
+        stores: [
+          {
+            store_id: 'I004-' + Math.floor(Math.random() * 100),
+            name: 'I004-' + Math.floor(Math.random() * 100),
+            longitude: getRdNum(77, 133),
+            latitude: getRdNum(18.5, 44)
+          },
+          {
+            store_id: 'I004-' + Math.floor(Math.random() * 100),
+            name: 'I004-' + Math.floor(Math.random() * 100),
+            longitude: getRdNum(77, 133),
+            latitude: getRdNum(18.5, 44)
+          },
+          {
+            store_id: 'I004-' + Math.floor(Math.random() * 100),
+            name: 'I004-' + Math.floor(Math.random() * 100),
+            longitude: getRdNum(77, 133),
+            latitude: getRdNum(18.5, 44)
+          },
+          {
+            store_id: 'I004-' + Math.floor(Math.random() * 100),
+            name: 'I004-' + Math.floor(Math.random() * 100),
+            longitude: getRdNum(77, 133),
+            latitude: getRdNum(18.5, 44)
+          },
+          {
+            store_id: 'I004-' + Math.floor(Math.random() * 100),
+            name: 'I004-' + Math.floor(Math.random() * 100),
+            longitude: getRdNum(77, 133),
+            latitude: getRdNum(18.5, 44)
+          },
+          {
+            store_id: 'I004-' + Math.floor(Math.random() * 100),
+            name: 'I004-' + Math.floor(Math.random() * 100),
+            longitude: getRdNum(77, 133),
+            latitude: getRdNum(18.5, 44)
           }
         ]
 
@@ -1399,6 +1472,23 @@ async function a40(ctx, next) {
   }
 }
 
+async function a41(ctx, next) {
+  ctx.response.body = {
+    "code": 0,
+    "data": [
+      {
+        "name": "RGM",
+        "permissions":  "{\"front\":[{\"menu\":\"概况面板\",\"name\":\"Home\",\"isShow\":true},{\"menu\":\"餐厅详情\",\"name\":\"RestaurantDetail\",\"isShow\":true},{\"menu\":\"报警管理\",\"name\":\"FaultManagement\",\"isShow\":true},{\"menu\":\"能源管理\",\"name\":\"EnergyManagement\",\"isShow\":true},{\"menu\":\"自动巡检\",\"name\":\"AutomaticInspection\",\"isShow\":true},{\"menu\":\"报表\",\"name\":\"Report\",\"isShow\":false},{\"menu\":\"配置管理\",\"name\":\"Config\",\"isShow\":true}]}",
+        "remark": "1",
+        "role": 15,
+        "role_id": "cb446aa62c5f4c02bdf370a81ffe6777"
+      }
+    ],
+    "message": "",
+    "total": 1,
+    "total_page": 1
+  }
+}
 app.use(router.routes());
 // listen
 
