@@ -47,6 +47,9 @@ router.get('/api/test', showTest)
   .get(`/usr/api/v1/yum-store/list`, a5)
   .get(`/dev/api/devices/branch/list`, a6)
   .get(`/dev/api/devices/category/list`, a7)
+  .get(`/dev/api/devices/status/:id`, a71)
+  .get(`/core/api/v1/devicedata/newest`, a72)
+
   .post(`/dev/api/v1/device/statistic/alarm/level/overall`, a8)
   .post(`/dev/api/devices/repair/list`, a9)
   .get(`/dev/api/v1/devices/inspect`, a10)
@@ -80,7 +83,7 @@ router.get('/api/test', showTest)
   .post(`/datak/api/v1/iot/energy/water/average/query_week`, a38)
   .post(`/datak/api/v1/iot/energy/water/average/query_month`, a39)
   .post(`/datak/api/v1/iot/energy/water/average/query_year`, a40)
-  .get(`/usr/api/v1/user/role/list` , a41)
+  .get(`/usr/api/v1/user/role/list`, a41)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -517,7 +520,7 @@ async function a7(ctx, next) {
     data: [
       {
         dev_id: '123',
-        serial: '123',
+        serial: 'fry123',
         device_type: '2001',
         alias: '炸锅',
         branch_id: '?',
@@ -530,7 +533,7 @@ async function a7(ctx, next) {
       },
       {
         dev_id: '123',
-        serial: '123',
+        serial: 'sundae123',
         device_type: '2027',
         alias: '圣代',
         branch_id: '?',
@@ -543,7 +546,7 @@ async function a7(ctx, next) {
       },
       {
         dev_id: '123',
-        serial: '123',
+        serial: 'ice123',
         device_type: '2029',
         alias: '制冰机',
         branch_id: '?',
@@ -556,7 +559,7 @@ async function a7(ctx, next) {
       },
       {
         dev_id: '123',
-        serial: '123',
+        serial: 'oven123',
         device_type: '2002',
         alias: '烤箱',
         branch_id: '?',
@@ -569,7 +572,7 @@ async function a7(ctx, next) {
       },
       {
         dev_id: '123',
-        serial: '123',
+        serial: 'drawer123',
         device_type: '2034',
         alias: '抽屉保温',
         branch_id: '?',
@@ -1478,7 +1481,7 @@ async function a41(ctx, next) {
     "data": [
       {
         "name": "RGM",
-        "permissions":  "{\"front\":[{\"menu\":\"概况面板\",\"name\":\"Home\",\"isShow\":true},{\"menu\":\"餐厅详情\",\"name\":\"RestaurantDetail\",\"isShow\":true},{\"menu\":\"报警管理\",\"name\":\"FaultManagement\",\"isShow\":true},{\"menu\":\"能源管理\",\"name\":\"EnergyManagement\",\"isShow\":true},{\"menu\":\"自动巡检\",\"name\":\"AutomaticInspection\",\"isShow\":true},{\"menu\":\"报表\",\"name\":\"Report\",\"isShow\":false},{\"menu\":\"配置管理\",\"name\":\"Config\",\"isShow\":true}]}",
+        "permissions": "{\"front\":[{\"menu\":\"概况面板\",\"name\":\"Home\",\"isShow\":true},{\"menu\":\"餐厅详情\",\"name\":\"RestaurantDetail\",\"isShow\":true},{\"menu\":\"报警管理\",\"name\":\"FaultManagement\",\"isShow\":true},{\"menu\":\"能源管理\",\"name\":\"EnergyManagement\",\"isShow\":true},{\"menu\":\"自动巡检\",\"name\":\"AutomaticInspection\",\"isShow\":true},{\"menu\":\"报表\",\"name\":\"Report\",\"isShow\":false},{\"menu\":\"配置管理\",\"name\":\"Config\",\"isShow\":true}]}",
         "remark": "1",
         "role": 15,
         "role_id": "cb446aa62c5f4c02bdf370a81ffe6777"
@@ -1487,6 +1490,39 @@ async function a41(ctx, next) {
     "message": "",
     "total": 1,
     "total_page": 1
+  }
+}
+
+async function a71(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: {
+      dev_id: '3',
+      first_access: '20200115',
+      last_update: '2020215',
+      status: 8
+    }
+
+  }
+}
+
+async function a72(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: {
+      id: '32',
+      tenant_id: '34',
+      deviceType: '2002',
+      deviceId: 'gfds',
+      serial: 'fgfds',
+      hubId: '43',
+      upload: '20200102',
+      pushed: '202005515',
+      data: {}
+    }
+
   }
 }
 app.use(router.routes());
