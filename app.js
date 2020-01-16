@@ -84,6 +84,8 @@ router.get('/api/test', showTest)
   .post(`/datak/api/v1/iot/energy/water/average/query_month`, a39)
   .post(`/datak/api/v1/iot/energy/water/average/query_year`, a40)
   .get(`/usr/api/v1/user/role/list`, a41)
+  .get(`/dev/api/devices/detail/:dev_id`, a42)
+  .get(`/dev/api/devices/branch/device-type/list`, a43)
   ;
 async function getBingImg(ctx) {
   request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
@@ -224,10 +226,7 @@ async function a2(ctx, next) {
     "front": [{ "menu": "概况面板", "name": "Home", "isShow": true }, { "menu": "餐厅详情", "name": "RestaurantDetail", "isShow": true }, { "menu": "报警管理", "name": "FaultManagement", "isShow": true }, { "menu": "能源管理", "name": "EnergyManagement", "isShow": true }, { "menu": "万能工作表", "name": "Report", "isShow": true }, { "menu": "配置管理", "name": "Config", "isShow": true }]
 
   }
-  ctx.response.body = {
-    "code": 0,
-    "data": { "access_token": "NDFjYWM4OGVmZDU1NDA1M2E4ZTEzZGI0N2ExOGQ4MjI5MDNjYWRiYTkxODk0NzFkOWUwYzUwZGU2ZTg4YjM1MQ==", "name": "RSC", "roleList": [{ "name": "RSC", "permissions": JSON.stringify(p), "remark": null, "role": 22, "role_id": "2705193cd146472fb49303f395259475" }], "status": 1, "user_id": "100562884" }, "message": ""
-  }
+  ctx.response.body = { "code": 0, "data": { "access_token": "NzRmNTEwZmJlNDZiNDhmOWI0YmU1ZTM2ZDFhNmJmMzRjNmE1ZDg2ZDVlOGU0ZTY1OTNjN2M5ODczYWY0MmQzZQ==", "name": "RGM", "roleList": [{ "name": "RGM", "permissions": "{\"front\":[{\"menu\":\"概况面板\",\"name\":\"Home\",\"isShow\":true},{\"menu\":\"餐厅详情\",\"name\":\"RestaurantDetail\",\"isShow\":true},{\"menu\":\"报警管理\",\"name\":\"FaultManagement\",\"isShow\":true},{\"menu\":\"能源管理\",\"name\":\"EnergyManagement\",\"isShow\":true},{\"menu\":\"自动巡检\",\"name\":\"AutomaticInspection\",\"isShow\":true},{\"menu\":\"报表\",\"name\":\"Report\",\"isShow\":false},{\"menu\":\"配置管理\",\"name\":\"Config\",\"isShow\":true}],\"back\":[{\"menu\":\"餐厅设备配置\",\"name\":\"EquipmentConfig\",\"isShow\":true,\"buttons\":[{\"name\":\"激活\",\"btnid\":\"active\",\"checked\":true},{\"name\":\"配置基本信息\",\"btnid\":\"set\",\"checked\":true}]},{\"menu\":\"设备管理\",\"name\":\"ManageDevice\",\"children\":[{\"menu\":\"厨房设备\",\"name\":\"Kitchen\",\"isShow\":true,\"buttons\":[{\"name\":\"一键同步\",\"btnid\":\"async\",\"checked\":true},{\"name\":\"手自动配置\",\"btnid\":\"handauto\",\"checked\":true},{\"name\":\"品牌型号管理\",\"btnid\":\"manage\",\"checked\":true},{\"name\":\"新增\",\"btnid\":\"add\",\"checked\":true},{\"name\":\"删除\",\"btnid\":\"delete\",\"checked\":true},{\"name\":\"参数配置\",\"btnid\":\"set\",\"checked\":true},{\"name\":\"PM保养\",\"btnid\":\"pm\",\"checked\":true},{\"name\":\"零部件更换\",\"btnid\":\"replace\",\"checked\":true}]},{\"menu\":\"设施设备\",\"name\":\"Facility\",\"isShow\":true,\"buttons\":[{\"name\":\"一键同步\",\"btnid\":\"async\",\"checked\":true},{\"name\":\"手自动配置\",\"btnid\":\"set\",\"checked\":true},{\"name\":\"点位配置\",\"btnid\":\"set\",\"checked\":true},{\"name\":\"品牌型号管理\",\"btnid\":\"manage\",\"checked\":true},{\"name\":\"新增\",\"btnid\":\"add\",\"checked\":true},{\"name\":\"删除\",\"btnid\":\"delete\",\"checked\":true},{\"name\":\"PM保养\",\"btnid\":\"pm\",\"checked\":true},{\"name\":\"零部件更换\",\"btnid\":\"replace\",\"checked\":true}]}]},{\"menu\":\"规则管理\",\"name\":\"RuleManage\",\"children\":[{\"menu\":\"报警模板配置\",\"name\":\"AlarmTemplateConfig\",\"children\":[{\"menu\":\"厨房设备\",\"name\":\"AlarmKitchen\",\"isShow\":true,\"buttons\":[{\"name\":\"新增\",\"btnid\":\"add\",\"checked\":true},{\"name\":\"编辑\",\"btnid\":\"modify\",\"checked\":true},{\"name\":\"删除\",\"btnid\":\"delete\",\"checked\":true},{\"name\":\"报警规则配置\",\"btnid\":\"set\",\"checked\":true}]},{\"menu\":\"设施设备\",\"name\":\"AlarmFacility\",\"isShow\":true,\"buttons\":[{\"name\":\"新增\",\"btnid\":\"add\",\"checked\":true},{\"name\":\"编辑\",\"btnid\":\"modify\",\"checked\":true},{\"name\":\"删除\",\"btnid\":\"delete\",\"checked\":true},{\"name\":\"报警规则配置\",\"btnid\":\"set\",\"checked\":true}]}]},{\"menu\":\"值描述配置\",\"name\":\"ValueDesc\",\"isShow\":true,\"buttons\":[{\"name\":\"导入\",\"btnid\":\"import\",\"checked\":true}]}]},{\"menu\":\"更新管理\",\"name\":\"UpdateManage\",\"children\":[{\"menu\":\"网关更新\",\"name\":\"GatewayUpdate\",\"isShow\":true,\"buttons\":[{\"name\":\"更新\",\"btnid\":\"update\",\"checked\":true},{\"name\":\"查看更新日志\",\"btnid\":\"look\",\"checked\":true}]},{\"menu\":\"PLC更新\",\"name\":\"PLCUpadate\",\"isShow\":true,\"buttons\":[{\"name\":\"更新\",\"btnid\":\"update\",\"checked\":true},{\"name\":\"查看更新日志\",\"btnid\":\"look\",\"checked\":true}]}]},{\"menu\":\"权限管理\",\"name\":\"PermissionManage\",\"children\":[{\"menu\":\"用户列表\",\"name\":\"Table\",\"isShow\":true,\"buttons\":[{\"name\":\"新增\",\"btnid\":\"add\",\"checked\":true},{\"name\":\"编辑\",\"btnid\":\"modify\",\"checked\":true},{\"name\":\"删除\",\"btnid\":\"delete\",\"checked\":true},{\"name\":\"配置市场权限\",\"btnid\":\"set\",\"checked\":true}]},{\"menu\":\"角色权限\",\"name\":\"Permission\",\"isShow\":true,\"buttons\":[{\"name\":\"新增\",\"btnid\":\"add\",\"checked\":true},{\"name\":\"编辑\",\"btnid\":\"modify\",\"checked\":true},{\"name\":\"删除\",\"btnid\":\"delete\",\"checked\":true},{\"name\":\"配置前端菜单权限\",\"btnid\":\"frontSet\",\"checked\":true},{\"name\":\"配置后端菜单权限\",\"btnid\":\"backSet\",\"checked\":true}]}]},{\"menu\":\"启停计划设置\",\"name\":\"StartstopPlan\",\"isShow\":true,\"buttons\":[{\"name\":\"启用\",\"btnid\":\"enable\",\"checked\":true}]}]}", "remark": "1", "role": 15, "role_id": "cb446aa62c5f4c02bdf370a81ffe6777" }], "status": 1, "user_id": "100562883" }, "message": "" }
 }
 function getRdNum(min, max) {
   min = Math.ceil(min);
@@ -511,6 +510,10 @@ async function a7(ctx, next) {
   let data = []
   let pos = { top: "56", left: "20" }
   let air = { top: "20", left: "54" }
+  let fer03 = { top: "20", left: "44" }
+  let warmer32 = { top: '20', left: '2' }
+  let fridge32 = { top: '20', left: '10' }
+  let wind = { top: '20', left: '15' }
 
   ctx.response.body = {
     code: 0,
@@ -528,7 +531,7 @@ async function a7(ctx, next) {
         branch_number: '?',
         status: 0,
         install_layout_pos: "{\"top\":\"36\",\"left\":\"89\"}",
-        m_catetory: '厨房设备',
+        m_catetory: 0,
         s_category: '',
       },
       {
@@ -541,7 +544,7 @@ async function a7(ctx, next) {
         branch_number: '?',
         status: 0,
         install_layout_pos: "{\"top\":\"86\",\"left\":\"59\"}",
-        m_catetory: '厨房设备',
+        m_catetory: 0,
         s_category: '',
       },
       {
@@ -554,7 +557,7 @@ async function a7(ctx, next) {
         branch_number: '?',
         status: 0,
         install_layout_pos: "{\"top\":\"26\",\"left\":\"59\"}",
-        m_catetory: '厨房设备',
+        m_catetory: 0,
         s_category: '',
       },
       {
@@ -567,7 +570,7 @@ async function a7(ctx, next) {
         branch_number: '?',
         status: 0,
         install_layout_pos: JSON.stringify(pos),
-        m_catetory: '厨房设备',
+        m_catetory: 0,
         s_category: '',
       },
       {
@@ -580,7 +583,7 @@ async function a7(ctx, next) {
         branch_number: '?',
         status: 0,
         install_layout_pos: "{\"top\":\"43\",\"left\":\"89\"}",
-        m_catetory: '厨房设备',
+        m_catetory: 0,
         s_category: '',
       },
       {
@@ -593,7 +596,59 @@ async function a7(ctx, next) {
         branch_number: '?',
         status: 0,
         install_layout_pos: JSON.stringify(air),
-        m_catetory: '设施设备',
+        m_catetory: 1,
+        s_category: '',
+      },
+      {
+        dev_id: 'ad123',
+        serial: 'fre03',
+        device_type: '2003',
+        alias: '冷藏库',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(fer03),
+        m_catetory: 0,
+        s_category: '',
+      },
+      {
+        dev_id: 'warmer32',
+        serial: 'warmer32',
+        device_type: '2005',
+        alias: '直立保温柜',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(warmer32),
+        m_catetory: 0,
+        s_category: '',
+      },
+      {
+        dev_id: 'fridge32vgfd',
+        serial: 'fridge32',
+        device_type: '2006',
+        alias: '冷藏冰箱',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(fridge32),
+        m_catetory: 0,
+        s_category: '',
+      },
+      {
+        dev_id: 'windfd',
+        serial: 'windfd',
+        device_type: '2010',
+        alias: '新排风',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(wind),
+        m_catetory: 1,
         s_category: '',
       }
     ]
@@ -1522,6 +1577,139 @@ async function a72(ctx, next) {
       pushed: '202005515',
       data: {}
     }
+
+  }
+}
+
+async function a42(ctx, next) {
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    data: {
+      dev_id: 'xx',
+      serial: 'I004-' + Math.floor(Math.random() * 100),
+      alias: '冷藏库',
+      device_type: '2003',
+      branch_id: '324',
+      branch_number: 'gfdsg',
+      building: '',
+      floor: 2,
+      room: 3,
+      topology: 4,
+      topo_id: '435',
+      secret_key: '435',
+      sketchs: [],
+      mf_id: 'gfeds',
+      model_id: 'gfds',
+      mtc_id: 'gfd',
+      brand_id: 'bgfd',
+      location: '',
+      observer: '',
+      mf_name: '',
+      model_name: 'ITX',
+      mtc_name: 'SGF',
+      brand_name: 'GFDS',
+      longitude: 'BFDS',
+      latitude: 43,
+      activated: 1,
+      enable: 1,
+      asset: 1,
+      show_tip: 1,
+      m_category: 1,
+      s_category: 1,
+      extra: ''
+    }
+
+  }
+}
+
+async function a43(ctx, next) {
+  console.log(ctx.request.query.device_type)
+  const deviceType = Number(ctx.request.query.device_type)
+  let data = []
+  if (deviceType === 2009) {
+    data = [
+      {
+        dev_id: 'fdsa',
+        serial: 'n',
+        device_type: '2009',
+        alias: '客区空调,',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
+
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
+
+  if (deviceType === 2010) {
+    data = [
+      {
+        dev_id: 'fdsa',
+        serial: 'n',
+        device_type: '2010',
+        alias: '排风',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
+
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
+
+  ctx.response.body = {
+    code: 0,
+    message: '',
+    total_page: 10,
+    total: 100,
+    data: [data[0],data[0],data[0],data[0]]
+
 
   }
 }
