@@ -514,6 +514,9 @@ async function a7(ctx, next) {
   let warmer32 = { top: '20', left: '2' }
   let fridge32 = { top: '20', left: '10' }
   let wind = { top: '20', left: '15' }
+  let light = { top: '20',left: '20'}
+  let ell = {top: '26.8',left:'25.156148956489'}
+  let proWater = {top:'28.33',left:'25.616'}
 
   ctx.response.body = {
     code: 0,
@@ -648,6 +651,45 @@ async function a7(ctx, next) {
         branch_number: '?',
         status: 0,
         install_layout_pos: JSON.stringify(wind),
+        m_catetory: 1,
+        s_category: '',
+      },
+      {
+        dev_id: 'light',
+        serial: 'light32',
+        device_type: '2011',
+        alias: '照明',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(light),
+        m_catetory: 1,
+        s_category: '',
+      },
+      {
+        dev_id: 'ell43',
+        serial: 'ell3',
+        device_type: '2012',
+        alias: '充电桩',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(ell),
+        m_catetory: 1,
+        s_category: '',
+      },
+      {
+        dev_id: 'proWater',
+        serial: 'proWater',
+        device_type: '2015',
+        alias: '供水',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(proWater),
         m_catetory: 1,
         s_category: '',
       }
@@ -1702,7 +1744,119 @@ async function a43(ctx, next) {
       }
     ]
   }
+  if (deviceType === 2011) {
+    data = [
+      {
+        dev_id: 'light',
+        serial: 'n',
+        device_type: '2011',
+        alias: '照明',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
 
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
+
+  if (deviceType === 2012) {
+    data = [
+      {
+        dev_id: 'light',
+        serial: 'n',
+        device_type: '2012',
+        alias: '充电',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
+
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
+
+  if (deviceType === 2015) {
+    data = [
+      {
+        dev_id: 'bfnhgfd654udsb',
+        serial: 'bfdsnb7uy76hn',
+        device_type: '2015',
+        alias: '供水',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
+
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
   ctx.response.body = {
     code: 0,
     message: '',
