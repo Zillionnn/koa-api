@@ -532,6 +532,7 @@ async function a7(ctx, next) {
         branch_id: '?',
         branch_name: '??',
         branch_number: '?',
+        model_name: 'RATIONAL SCC WE-64',
         status: 0,
         install_layout_pos: "{\"top\":\"36\",\"left\":\"89\"}",
         m_catetory: 0,
@@ -543,6 +544,7 @@ async function a7(ctx, next) {
         device_type: '2027',
         alias: '圣代',
         branch_id: '?',
+        model_name: 'RATIONAL SCC WE-64',
         branch_name: '??',
         branch_number: '?',
         status: 0,
@@ -553,6 +555,7 @@ async function a7(ctx, next) {
       {
         dev_id: '123',
         serial: 'ice123',
+        model_name: 'RATIONAL SCC WE-64',
         device_type: '2029',
         alias: '制冰机',
         branch_id: '?',
@@ -565,6 +568,7 @@ async function a7(ctx, next) {
       },
       {
         dev_id: '123',
+        model_name: 'RATIONAL SCC WE-64',
         serial: 'oven123',
         device_type: '2002',
         alias: '烤箱',
@@ -578,6 +582,7 @@ async function a7(ctx, next) {
       },
       {
         dev_id: '123',
+        model_name: 'RATIONAL SCC WE-64',
         serial: 'drawer123',
         device_type: '2034',
         alias: '抽屉保温',
@@ -592,6 +597,7 @@ async function a7(ctx, next) {
       {
         dev_id: 'ad123',
         serial: 'air4',
+        model_name: 'RATIONAL SCC WE-64',
         device_type: '2009',
         alias: '空调',
         branch_id: '?',
@@ -603,8 +609,37 @@ async function a7(ctx, next) {
         s_category: '',
       },
       {
+        dev_id: '2023fresfe',
+        serial: 'air4',
+        model_name: 'RATIONAL SCC WE-64',
+        device_type: '2023',
+        alias: '烟罩风机',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(air),
+        m_catetory: 1,
+        s_category: '',
+      },
+      {
+        dev_id: '2024fresfe',
+        serial: 'air4',
+        model_name: 'RATIONAL SbgfbsCC WE-64',
+        device_type: '2024',
+        alias: '风幕机',
+        branch_id: '?',
+        branch_name: '??',
+        branch_number: '?',
+        status: 0,
+        install_layout_pos: JSON.stringify(air),
+        m_catetory: 1,
+        s_category: '',
+      },
+      {
         dev_id: 'ad123',
         serial: 'fre03',
+        model_name: 'RATIONAL SCC WE-64',
         device_type: '2003',
         alias: '冷藏库',
         branch_id: '?',
@@ -618,6 +653,7 @@ async function a7(ctx, next) {
       {
         dev_id: 'warmer32',
         serial: 'warmer32',
+        model_name: 'RATIONAL SCC WE-64',
         device_type: '2005',
         alias: '直立保温柜',
         branch_id: '?',
@@ -635,6 +671,7 @@ async function a7(ctx, next) {
         alias: '冷藏冰箱',
         branch_id: '?',
         branch_name: '??',
+        model_name: 'RATIONAL SCC WE-64',
         branch_number: '?',
         status: 0,
         install_layout_pos: JSON.stringify(fridge32),
@@ -647,6 +684,7 @@ async function a7(ctx, next) {
         device_type: '2010',
         alias: '新排风',
         branch_id: '?',
+        model_name: 'RATIONAL SCC WE-64',
         branch_name: '??',
         branch_number: '?',
         status: 0,
@@ -658,6 +696,7 @@ async function a7(ctx, next) {
         dev_id: 'light',
         serial: 'light32',
         device_type: '2011',
+        model_name: 'RATIONAL SCC WE-64',
         alias: '照明',
         branch_id: '?',
         branch_name: '??',
@@ -671,6 +710,7 @@ async function a7(ctx, next) {
         dev_id: 'ell43',
         serial: 'ell3',
         device_type: '2012',
+        model_name: 'RATIONAL SCC WE-64',
         alias: '充电桩',
         branch_id: '?',
         branch_name: '??',
@@ -683,6 +723,7 @@ async function a7(ctx, next) {
       {
         dev_id: 'proWater',
         serial: 'proWater',
+        model_name: 'RATIONAL SCC WE-64',
         device_type: '2015',
         alias: '供水',
         branch_id: '?',
@@ -1781,7 +1822,119 @@ async function a43(ctx, next) {
       }
     ]
   }
+ if (deviceType === 2023) {
+    data = [
+      {
+        dev_id: '202343tgt',
+        serial: 'n',
+        device_type: '2023',
+        alias: '烟罩风机',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
 
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
+  if (deviceType === 2024) {
+    data = [
+      {
+        dev_id: '20243tgt',
+        serial: 'n',
+        device_type: '2024',
+        alias: '风幕机',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
+
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
+  if (deviceType === 2022) {
+    data = [
+      {
+        dev_id: '2022fndos',
+        serial: 'n',
+        device_type: '2022',
+        alias: '新风机',
+        branch_id: '',
+        branch_name: '',
+        branch_number: "",
+        building: "",
+        floor: "",
+        room: "",
+        secret_key: "",
+        sketchs: "",
+
+        mf_name: "",
+        model_name: "",
+        mtc_name: "",
+        brand_name: "",
+        can_delete: "",
+        location: "",
+        observer: "",
+        activated: "",
+        enable: "",
+        longitude: "",
+        latitude: "",
+        create_date: "",
+        last_update: "",
+        asset: "",
+        show_tip: "",
+        m_category: "",
+        s_category: "",
+        extra: "",
+      }
+    ]
+  }
+  
+  
   if (deviceType === 2012) {
     data = [
       {
