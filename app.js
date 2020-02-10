@@ -733,6 +733,76 @@ async function a7(ctx, next) {
         install_layout_pos: JSON.stringify(proWater),
         m_catetory: 1,
         s_category: '',
+      },
+
+      {
+        "alias": "电磁炉",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feb5a68c369",
+        "device_type": "2031",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+
+      {
+        "alias": "咖啡机",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2034",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+
+      {
+        "alias": "滤水",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2008",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+
+      {
+        "alias": "滤水2026",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2026",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+
+      {
+        "alias": "汽水",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2035",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
       }
     ]
 
