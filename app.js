@@ -67,7 +67,7 @@ router.get('/api/test', showTest)
   .post(`/datak/api/v1/iot/energy/water/average/day`, a22)
   .post(`/dev/api/v1/device/statistic/alarm/overall/group`, a23)
   .get(`/dev/api/v1/devices/startup/query`, a24)
-  .get(`/dev/api/v1/devices/startup/plan/serial/123`, a25)
+  .get(`/dev/api/v1/devices/startup/plan`, a25)
   .get(`/usr/api/v1/store/admin-subs/list`, a26)
   .get(`/datak/api/v1/iot/universal-report-template`, a27)
   .get(`/dev/api/devices/collection/list`, a28)
@@ -514,9 +514,9 @@ async function a7(ctx, next) {
   let warmer32 = { top: '20', left: '2' }
   let fridge32 = { top: '20', left: '10' }
   let wind = { top: '20', left: '15' }
-  let light = { top: '20',left: '20'}
-  let ell = {top: '26.8',left:'25.156148956489'}
-  let proWater = {top:'28.33',left:'25.616'}
+  let light = { top: '20', left: '20' }
+  let ell = { top: '26.8', left: '25.156148956489' }
+  let proWater = { top: '28.33', left: '25.616' }
 
   ctx.response.body = {
     code: 0,
@@ -798,6 +798,123 @@ async function a7(ctx, next) {
         "branch_number": "HZ1352",
         "dev_id": "b44388ed104f46538e57d0feba68c369",
         "device_type": "2035",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "ice cream",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2021",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "sundae",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2027",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "薯条",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2037",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "煎烤炉",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2028",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "PDU",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2030",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "洗碗机",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2038",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "腌制机",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2036",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "制冰机",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2029",
+        "extra": null,
+        "m_category": 0,
+        "s_category": 2,
+        "serial": "0001",
+        "status": 99
+      },
+      {
+        "alias": "直立保温柜",
+        "branch_id": "HZ1352",
+        "branch_name": null,
+        "branch_number": "HZ1352",
+        "dev_id": "b44388ed104f46538e57d0feba68c369",
+        "device_type": "2005",
         "extra": null,
         "m_category": 0,
         "s_category": 2,
@@ -1312,6 +1429,8 @@ async function a23(ctx, next) {
 
 async function a24(ctx, next) {
   const ONE_DAY_MS = 24 * 3600 * 1000
+  const ONE_HOUR = 3600 * 1000
+  let t = new Date(new Date(new Date().getTime()).toDateString()).getTime()
   ctx.response.body = {
     code: 0,
     message: '',
@@ -1321,7 +1440,7 @@ async function a24(ctx, next) {
         serial: 'FRYER001',
         alias: '一个炸锅',
         startup: 0,
-        upload: 1577066918582 - ONE_DAY_MS,
+        upload: t + ONE_HOUR * 6 - ONE_DAY_MS,
         create_date: 1577066918582
       },
       {
@@ -1329,7 +1448,7 @@ async function a24(ctx, next) {
         serial: 'FRYER001',
         alias: '一个炸锅',
         startup: 1,
-        upload: 1577066998582 - ONE_DAY_MS,
+        upload:  t + ONE_HOUR * 7 - ONE_DAY_MS,
         create_date: 1577066918582
       },
       {
@@ -1337,7 +1456,7 @@ async function a24(ctx, next) {
         serial: 'FRYER001',
         alias: '一个炸锅',
         startup: 0,
-        upload: 1577068918582 - ONE_DAY_MS,
+        upload:  t + ONE_HOUR * 12 - ONE_DAY_MS,
         create_date: 1577066918582
       },
       {
@@ -1345,7 +1464,7 @@ async function a24(ctx, next) {
         serial: 'FRYER001',
         alias: '一个炸锅',
         startup: 1,
-        upload: 1577079918582 - ONE_DAY_MS,
+        upload: t + ONE_HOUR * 20 - ONE_DAY_MS,
         create_date: 1577066918582
       },
       {
@@ -1353,8 +1472,8 @@ async function a24(ctx, next) {
         serial: 'FRYER001',
         alias: '一个炸锅',
         startup: 0,
-        upload: 1577089918582 - ONE_DAY_MS,
-        create_date: 1577066918582
+        upload: t + ONE_HOUR * 23 - ONE_DAY_MS,
+        create_date: 1577066918582 + 3600 * 1000
       }
     ]
 
@@ -1892,7 +2011,7 @@ async function a43(ctx, next) {
       }
     ]
   }
- if (deviceType === 2023) {
+  if (deviceType === 2023) {
     data = [
       {
         dev_id: '202343tgt',
@@ -2003,8 +2122,8 @@ async function a43(ctx, next) {
       }
     ]
   }
-  
-  
+
+
   if (deviceType === 2012) {
     data = [
       {
@@ -2085,7 +2204,7 @@ async function a43(ctx, next) {
     message: '',
     total_page: 10,
     total: 100,
-    data: [data[0],data[0],data[0],data[0]]
+    data: [data[0], data[0], data[0], data[0]]
 
 
   }
