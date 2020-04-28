@@ -33,10 +33,7 @@ function res(code, message, data) {
     data: null || data
   }
 }
-app.use(async (ctx, next) => {
-  console.log(new Date())
-  next()
-});
+
 
 router.get('/api/test', showTest)
   .get(`/api/bing_daily_img`, getBingImg)
