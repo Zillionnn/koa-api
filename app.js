@@ -36,7 +36,7 @@ function res(code, message, data) {
 
 
 router.get('/api/test', showTest)
-  .get(`/api/bing_daily_img`, getBingImg)
+  .get(`/api/bing_daily_image`, getBingImg)
   .post(`/api/post`, add)
   .post(`/api/v1/user/login`, signIn)
   .get(`/api/v1/user/store/list/123`, storeList)
