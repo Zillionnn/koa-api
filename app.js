@@ -4,6 +4,7 @@ const koaBody = require('koa-body');
 const cors = require('koa-cors');
 const Koa = require('koa');
 const app = module.exports = new Koa();
+const got = require('got');
 
 const request = require('request')
 // "database"
@@ -32,13 +33,9 @@ function res(code, message, data) {
     data: null || data
   }
 }
-// app.use(async (ctx, next) => {
-//   console.log(new Date())
-//   next()
-// });
 
 router.get('/api/test', showTest)
-  .get(`/api/bing_daily_img`, getBingImg)
+  .get(`/api/bing_daily_image`, getBingImg)
   .post(`/api/post`, add)
   .post(`/api/v1/user/login`, signIn)
   .get(`/api/v1/user/store/list/123`, storeList)
@@ -88,21 +85,30 @@ router.get('/api/test', showTest)
   .get(`/api/devices/type/list`, a15)
   ;
 async function getBingImg(ctx) {
-  request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', function (error, response, body) {
-    console.log('error:', error); // Print the error if one occurred
-    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    console.log('body:', typeof body); // Print the HTML for the Google homepage.
-    let r = JSON.parse(body)
-    console.log(`https://bing.com${r.images[0].url}`)
-    ctx.response.body={
-      code:0,
-      message:'success',
-      data:{
-        url:`https://bing.com${r.images[0].url}`
-      }
+  const response = await got('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1');
+  // console.log(response.body);
+  let r = JSON.parse(response.body)
+  const link =`https://bing.com${r.images[0].url}`
+  console.log(link)
+  ctx.response.body={
+    code:0,
+    message:'success',
+    data:{
+      url: link
     }
-  });
+  }
 }
+
+function getBingIMG(){
+  return new Promise((resolve, reject)=>{
+    request('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1',  (error, response, body)=> {
+      
+      let r = JSON.parse(body)
+      resolve(`https://bing.com${r.images[0].url}`)
+    });
+  })
+}
+
 async function a15(ctx) {
   ctx.response.body = {
     code: 0,
