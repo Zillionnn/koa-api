@@ -32,10 +32,10 @@ function res(code, message, data) {
     data: null || data
   }
 }
-app.use(async (ctx, next) => {
-  console.log(new Date())
-  next()
-});
+// app.use(async (ctx, next) => {
+//   console.log(new Date())
+//   next()
+// });
 
 router.get('/api/test', showTest)
   .get(`/api/bing_daily_img`, getBingImg)
@@ -1051,8 +1051,17 @@ async function does(ctx) {
     "oc": 1
   }
 }
+
+function st(){
+  return new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      resolve()
+    }, 90000)
+  })
+}
 async function showTest(ctx, next) {
-  // await next();
+  await st();
+
   ctx.response.body = { "ok": "12425" };
 }
 async function add(ctx, next) {
